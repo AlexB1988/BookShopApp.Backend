@@ -1,4 +1,7 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using BookShopApp.Application.CommandsQueries.Authors.Queries.GetAuthorBiography;
+using BookShopApp.Domain;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +14,7 @@ namespace BookShopApp.Application.Authors.Commands.CreateAuthor
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Biography { get; set; }
+
     }
 }

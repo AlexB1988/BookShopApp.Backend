@@ -22,7 +22,8 @@ namespace BookShopApp.Application.Authors.Commands.CreateAuthor
         {
             var author = new Author
             {
-                Name = request.Name
+                Name = request.Name,
+                Biography = request.Biography
             };
             await _dataContext.Authors.AddAsync(author, cancellationToken);
             await _dataContext.SaveChangesAsync(cancellationToken);
