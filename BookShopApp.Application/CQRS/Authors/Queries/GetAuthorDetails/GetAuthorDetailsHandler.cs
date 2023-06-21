@@ -11,18 +11,18 @@ using System.Threading.Tasks;
 
 namespace BookShopApp.Application.CommandsQueries.Authors.Queries.GetAuthorBiography
 {
-    public class GetAuthorBiographyHandler:IRequestHandler<GetAuthorBiographyQuery,AuthorDetailsVm>
+    public class GetAuthorDetailsHandler:IRequestHandler<GetAuthorDetailsQuery,AuthorDetailsVm>
     {
         private readonly IDataContext _dataContext;
         private readonly IMapper _mapper;
 
-        public GetAuthorBiographyHandler(IDataContext dataContext, IMapper mapper)
+        public GetAuthorDetailsHandler(IDataContext dataContext, IMapper mapper)
         {
             _dataContext = dataContext;
             _mapper = mapper;
         }
 
-        public async Task<AuthorDetailsVm> Handle(GetAuthorBiographyQuery request, CancellationToken cancellationToken)
+        public async Task<AuthorDetailsVm> Handle(GetAuthorDetailsQuery request, CancellationToken cancellationToken)
         {
             var entity = await _dataContext.Authors.FirstOrDefaultAsync(author=>author.Id==request.Id);
 

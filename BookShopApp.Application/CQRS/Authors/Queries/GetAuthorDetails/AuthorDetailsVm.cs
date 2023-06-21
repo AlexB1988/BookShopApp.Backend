@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BookShopApp.Application.CommandsQueries.Authors.Queries.GetAuthorBiography
 {
-    public class AuthorBiographyVm
+    public class AuthorDetailsVm
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -16,7 +16,7 @@ namespace BookShopApp.Application.CommandsQueries.Authors.Queries.GetAuthorBiogr
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<Author, AuthorBiographyVm>()
+            profile.CreateMap<Author, AuthorDetailsVm>()
                 .ForMember(authorVm => authorVm.Id,
                     opt => opt.MapFrom(author => author.Id))
                 .ForMember(authorVm => authorVm.Name,

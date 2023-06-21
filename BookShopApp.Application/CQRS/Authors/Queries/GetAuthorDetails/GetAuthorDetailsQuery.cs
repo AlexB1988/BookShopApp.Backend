@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookShopApp.Application.CommandsQueries.Authors.Queries.GetAuthorBiography
 {
-    public class GetAuthorBiographyQuery:IRequest<AuthorDetailsVm>
+    public class GetAuthorDetailsQuery:IRequest<AuthorDetailsVm>
     {
         public int Id { get; set; }
     }
