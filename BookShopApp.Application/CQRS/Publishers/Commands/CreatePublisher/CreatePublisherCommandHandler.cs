@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookShopApp.Application.CommandsQueries.Publishers.Commands
+namespace BookShopApp.Application.CQRS.Publishers.Commands.CreatePublisher
 {
-    public class CreatePublisherCommandHandler : IRequestHandler<CreatePublisherCommand,int>
+    public class CreatePublisherCommandHandler : IRequestHandler<CreatePublisherCommand, int>
     {
         private readonly IDataContext _dataContext;
 
@@ -24,7 +24,7 @@ namespace BookShopApp.Application.CommandsQueries.Publishers.Commands
             {
                 Name = request.Name
             };
-            await _dataContext.Publishers.AddAsync(publisher,cancellationToken);
+            await _dataContext.Publishers.AddAsync(publisher, cancellationToken);
             await _dataContext.SaveChangesAsync(cancellationToken);
 
             return publisher.Id;

@@ -16,8 +16,4 @@
     <ProjectReference Include="..\BookShopApp.Domain\BookShopApp.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="CQRS\Publishers\Queries\" />
-  </ItemGroup>
-
 </Project>

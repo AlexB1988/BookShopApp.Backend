@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookShopApp.Application.CommandsQueries.Authors.Queries.GetAuthorBiography
+namespace BookShopApp.Application.CQRS.Publishers.Commands.CreatePublisher
 {
-    public class GetAuthorBiographyQuery:IRequest<AuthorBiographyVm>
+    public class CreatePublisherCommand : IRequest<int>
     {
         public int Id { get; set; }
+        public string Name { get; set; }
     }
 }
