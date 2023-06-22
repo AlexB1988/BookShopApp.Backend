@@ -28,6 +28,9 @@ namespace BookShopApp.Application.CQRS.Publishers.Commands.DeletePublisher
                 throw new NotFoundException(nameof(Publisher), request.Id);
             }
 
+            _dataContext.Publishers.Remove(entity);
+            _dataContext.SaveChangesAsync(cancellationToken);
+
             return Unit.Value;
         }
     }

@@ -20,14 +20,14 @@ namespace BookShopApp.Application.CommandsQueries.Authors.Commands.DeleteAuthor
         }
         public async Task<Unit> Handle(DeleteAuthorCommand request, CancellationToken cancellationToken)
         {
-            var author = await _dataContext.Authors.FindAsync(new object[] { request.Id }, cancellationToken);
+            var entity = await _dataContext.Authors.FindAsync(new object[] { request.Id }, cancellationToken);
 
-            if (author == null)
+            if (entity == null)
             {
                 throw new NotFoundException(nameof(Author), request.Id);
             }
 
-            _dataContext.Authors.Remove(author);
+            _dataContext.Authors.Remove(entity);
             await _dataContext.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;

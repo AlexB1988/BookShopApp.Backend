@@ -1,17 +1,21 @@
-﻿using System;
+﻿using BookShopApp.Domain;
+using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookShopApp.Domain
+namespace BookShopApp.Application.CQRS.Books.Commands.CreateBook
 {
-    public class Book:BaseEntity
+    public class CreateBookCommand:IRequest<int>
     {
+        public int Id { get; set; }
+        public string Name { get; set; }
         public int Year { get; set; }
         public Publisher Publisher { get; set; }
         public BookAmount BookAmount { get; set; }
         public BookPrice BookPrice { get; set; }
-        public ICollection<BookAuthor> BookAuthors { get; set; }
+        public IList<Author> Authors { get; set; }
     }
 }

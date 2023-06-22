@@ -20,14 +20,16 @@ namespace BookShopApp.Application.CQRS.Publishers.Commands.CreatePublisher
 
         public async Task<int> Handle(CreatePublisherCommand request, CancellationToken cancellationToken)
         {
-            var publisher = new Publisher
+            var entity = new Publisher
             {
-                Name = request.Name
+                Name = request.Name,
+                City= request.City,
+                DateBegin= request.DateBegin
             };
-            await _dataContext.Publishers.AddAsync(publisher, cancellationToken);
+            await _dataContext.Publishers.AddAsync(entity, cancellationToken);
             await _dataContext.SaveChangesAsync(cancellationToken);
 
-            return publisher.Id;
+            return entity.Id;
         }
     }
 }
