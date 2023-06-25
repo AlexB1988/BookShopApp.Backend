@@ -16,6 +16,9 @@ namespace BookShopApp.Persistence.EntityTypeConfiguration
             builder.HasKey(book => book.Id);
             builder.HasIndex(book => book.Id).IsUnique();
             builder.Property(book => book.Name).HasMaxLength(250);
+            builder.HasOne(book => book.Publisher)
+                .WithMany(publisher => publisher.Books)
+                .HasForeignKey(book => book.PublisherId);
         }
     }
 }

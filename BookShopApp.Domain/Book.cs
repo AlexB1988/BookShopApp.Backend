@@ -9,9 +9,11 @@ namespace BookShopApp.Domain
     public class Book:BaseEntity
     {
         public int Year { get; set; }
+        public int PublisherId { get; set; }
         public Publisher Publisher { get; set; }
-        public BookAmount BookAmount { get; set; }
-        public BookPrice BookPrice { get; set; }
+        public BookCurrentAmount Amount { get; set; }
+        public ICollection<BookIncome> Income { get; set; }
+        public ICollection<BookPrice> Price { get; set; }
         public ICollection<BookAuthor> BookAuthors { get; set; }
     }
 }

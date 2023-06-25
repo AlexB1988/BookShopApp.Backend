@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BookShopApp.Application.CommandsQueries.Authors.Queries.GetAuthorBiography
 {
-    public class GetAuthorDetailsHandler:IRequestHandler<GetAuthorDetailsQuery,AuthorDetailsVm>
+    public class GetAuthorDetailsHandler:IRequestHandler<GetAuthorDetailsQuery,AuthorDetailsViewModel>
     {
         private readonly IDataContext _dataContext;
         private readonly IMapper _mapper;
@@ -22,7 +22,7 @@ namespace BookShopApp.Application.CommandsQueries.Authors.Queries.GetAuthorBiogr
             _mapper = mapper;
         }
 
-        public async Task<AuthorDetailsVm> Handle(GetAuthorDetailsQuery request, CancellationToken cancellationToken)
+        public async Task<AuthorDetailsViewModel> Handle(GetAuthorDetailsQuery request, CancellationToken cancellationToken)
         {
             var entity = await _dataContext.Authors.FirstOrDefaultAsync(author=>author.Id==request.Id);
 
@@ -31,7 +31,7 @@ namespace BookShopApp.Application.CommandsQueries.Authors.Queries.GetAuthorBiogr
                 throw new NotFoundException(nameof(entity), request.Id);
             }
 
-            return _mapper.Map<AuthorDetailsVm>(entity);
+            return _mapper.Map<AuthorDetailsViewModel>(entity);
         }
     }
 }

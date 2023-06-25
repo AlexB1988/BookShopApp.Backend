@@ -14,8 +14,9 @@ namespace BookShopApp.Application.Interfaces
         DbSet<Author> Authors { get; set; }
         DbSet<Publisher> Publishers { get; set; }
         DbSet<BookPrice> Prices { get; set; }
-        DbSet<BookAmount> Amounts { get; set; }
         DbSet<BookAuthor> BookAuthors { get; set; }
+        DbSet<BookIncome> Income { get; set; }
+        DbSet<BookCurrentAmount> CurrentAmount { get; set; }
 
         public Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }

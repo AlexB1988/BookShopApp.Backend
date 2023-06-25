@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BookShopApp.Application.CommandsQueries.Authors.Queries.GetAuthorList
 {
-    public class GetAuthorListQueryHandler:IRequestHandler<GetAuthorListQuery,AuthorListVm>
+    public class GetAuthorListQueryHandler:IRequestHandler<GetAuthorListQuery,AuthorListViewModel>
     {
         private readonly IDataContext _dataContext;
 
@@ -23,11 +23,11 @@ namespace BookShopApp.Application.CommandsQueries.Authors.Queries.GetAuthorList
             _mapper = mapper;
         }
 
-        public async Task<AuthorListVm> Handle(GetAuthorListQuery request, CancellationToken cancellationToken)
+        public async Task<AuthorListViewModel> Handle(GetAuthorListQuery request, CancellationToken cancellationToken)
         {
             var authorsQuery= await _dataContext.Authors.ProjectTo<AuthorLookupDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
-            return new AuthorListVm { Authors= authorsQuery };
+            return new AuthorListViewModel { Authors= authorsQuery };
         }
 
     }

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace BookShopApp.Application.CQRS.Publishers.Queries.GetPublisherDetails
 {
-    public class GetPublisherDetailsQueryHandler : IRequestHandler<GetPublisherDetailsQuery, PublisherDetailsVm>
+    public class GetPublisherDetailsQueryHandler : IRequestHandler<GetPublisherDetailsQuery, PublisherDetailsViewModel>
     {
         private readonly IDataContext _dataContext;
         private readonly IMapper _mapper;
@@ -22,7 +22,7 @@ namespace BookShopApp.Application.CQRS.Publishers.Queries.GetPublisherDetails
             _dataContext = dataContext;
             _mapper = mapper;
         }
-        public async Task<PublisherDetailsVm> Handle(GetPublisherDetailsQuery request, CancellationToken cancellationToken)
+        public async Task<PublisherDetailsViewModel> Handle(GetPublisherDetailsQuery request, CancellationToken cancellationToken)
         {
             var entity = await _dataContext.Publishers.FirstOrDefaultAsync(publisher => publisher.Id == request.Id);
 
@@ -31,7 +31,7 @@ namespace BookShopApp.Application.CQRS.Publishers.Queries.GetPublisherDetails
                 throw new NotFoundException(nameof(Publisher),request.Id);
             }
 
-            return _mapper.Map<PublisherDetailsVm>(entity);
+            return _mapper.Map<PublisherDetailsViewModel>(entity);
         }
     }
 }

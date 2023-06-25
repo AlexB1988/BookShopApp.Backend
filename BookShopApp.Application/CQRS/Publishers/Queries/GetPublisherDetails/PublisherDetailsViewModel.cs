@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BookShopApp.Application.CQRS.Publishers.Queries.GetPublisherDetails
 {
-    public class PublisherDetailsVm
+    public class PublisherDetailsViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -17,7 +17,7 @@ namespace BookShopApp.Application.CQRS.Publishers.Queries.GetPublisherDetails
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<PublisherDetailsVm, Publisher>()
+            profile.CreateMap<PublisherDetailsViewModel, Publisher>()
                 .ForMember(publisherVm => publisherVm.Id,
                     opt => opt.MapFrom(publisher => publisher.Id))
                 .ForMember(publisherVm => publisherVm.Name,

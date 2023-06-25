@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookShopApp.Application.CommandsQueries.Authors.Queries.GetAuthorList
 {
-    public class AuthorListVm
+    public class AuthorListViewModel
     {
         public IList<AuthorLookupDto> Authors { get; set; }
     }

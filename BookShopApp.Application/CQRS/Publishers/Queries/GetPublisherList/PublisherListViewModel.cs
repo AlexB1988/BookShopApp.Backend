@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookShopApp.Application.CQRS.Publishers.Queries.GetPublisherList
 {
-    public class PublisherListVm
+    public class PublisherListViewModel
     {
         public IList<PublisherLookupDto> Publishers { get; set; }
     }

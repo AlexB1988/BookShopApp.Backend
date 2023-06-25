@@ -29,18 +29,18 @@ namespace BookShopApp.Application.CQRS.Books.Commands.UpdateBook
             }
             entityBook.Name = request.Name;
             entityBook.Year=request.Year;
-            entityBook.Publisher=request.Publisher;
-            entityBook.BookPrice.Price = request.BookPrice.Price;
-            entityBook.BookAmount.Amount=request.BookAmount.Amount;
+            entityBook.PublisherId=request.PublisherId;
             var authorsBook = await _dataContext.BookAuthors.Where(book => book.Book.Id == request.Id).ToListAsync(cancellationToken);
             _dataContext.BookAuthors.RemoveRange(authorsBook);
+
             var entityBookAuthors=new List<BookAuthor>();
+            
             foreach(var author in request.Authors)
             {
                 var bookAuthor = new BookAuthor
                 {
                     Book = entityBook,
-                    Author = author
+                    AuthorId = author
                 };
                 entityBookAuthors.Add(bookAuthor);
             }

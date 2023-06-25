@@ -16,4 +16,8 @@
     <ProjectReference Include="..\BookShopApp.Domain\BookShopApp.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="CQRS\Authors\Queries\GetAuthorList\Новая папка\" />
+  </ItemGroup>
+
 </Project>

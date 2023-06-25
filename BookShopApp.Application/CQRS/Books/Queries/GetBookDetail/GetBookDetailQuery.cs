@@ -6,9 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookShopApp.Application.CQRS.Books.Queries.GetBookList
+namespace BookShopApp.Application.CQRS.Books.Queries.GetBookDetail
 {
-    public class GetBookListQuery:IRequest<BookListViewModel>
+    public class GetBookDetailQuery:IRequest<BookViewModel>
     {
+        public int Id { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BookShopApp.Application.Common.Mappings;
 using BookShopApp.Domain;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BookShopApp.Application.CQRS.Publishers.Queries.GetPublisherList
 {
-    public class PublisherLookupDto
+    public class PublisherLookupDto:IMapWith<Publisher>
     {
         public int Id { get; set; }
         public string Name { get; set; }

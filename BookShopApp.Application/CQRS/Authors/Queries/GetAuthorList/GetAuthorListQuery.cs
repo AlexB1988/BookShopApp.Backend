@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookShopApp.Application.CommandsQueries.Authors.Queries.GetAuthorList
 {
-    public class GetAuthorListQuery:IRequest<AuthorListVm>
+    public class GetAuthorListQuery:IRequest<AuthorListViewModel>
     {
     }
 }

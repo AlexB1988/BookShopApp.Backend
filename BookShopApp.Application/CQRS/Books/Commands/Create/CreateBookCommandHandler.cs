@@ -1,6 +1,8 @@
-﻿using BookShopApp.Application.Interfaces;
+﻿using BookShopApp.Application.Common.Exceptions;
+using BookShopApp.Application.Interfaces;
 using BookShopApp.Domain;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,39 +23,52 @@ namespace BookShopApp.Application.CQRS.Books.Commands.CreateBook
 
         public async Task<int> Handle(CreateBookCommand request, CancellationToken cancellationToken)
         {
+            if(await _dataContext.Publishers.FirstOrDefaultAsync(publisher => publisher.Id == request.Id) == null)
+            {
+                throw new NotFoundException(nameof(Publisher), request.PublisherId);
+            }
             var entityBook = new Book
             {
                 Name = request.Name,
                 Year = request.Year,
-                Publisher = request.Publisher,
-                BookAmount = request.BookAmount,
-                BookPrice = request.BookPrice
+                PublisherId= request.PublisherId
             };
 
-            var entityAmount = new BookAmount
+            var entityBookIncome = new BookIncome
             {
-                Amount = request.BookAmount.Amount
+                Book=entityBook,
+                Amount=request.BookIncomeAmount,
+                IncomePrice=request.BookIncomePrice
             };
 
-            var entityPrice = new BookPrice
+            var entityCurrentAmount = new BookCurrentAmount
             {
-                Price = request.BookPrice.Price
+                Book = entityBook,
+                CurrentAmount = request.BookIncomeAmount
             };
 
             var entitiesAuthors = new List<BookAuthor>();
+
+            var authorList = await _dataContext.Authors.Select(author=>author.Id).ToListAsync(cancellationToken);
+            
+            //Проверить на корректность
+            if (request.Authors.Except(authorList) !=null)
+            {
+                throw new NotFoundException(nameof(Author), request.Authors);
+            }
 
             foreach(var author in request.Authors)
             {
                 var entityAuthor = new BookAuthor
                 {
                     Book = entityBook,
-                    Author = author
+                    AuthorId = author
                 };
                 entitiesAuthors.Add(entityAuthor);
             }
             await _dataContext.Books.AddAsync(entityBook,cancellationToken);
-            await _dataContext.Amounts.AddAsync(entityAmount,cancellationToken);
-            await _dataContext.Prices.AddAsync(entityPrice,cancellationToken);
+            await _dataContext.Income.AddAsync(entityBookIncome,cancellationToken);
+            await _dataContext.CurrentAmount.AddAsync(entityCurrentAmount, cancellationToken);
             await _dataContext.BookAuthors.AddRangeAsync(entitiesAuthors, cancellationToken);
 
             await _dataContext.SaveChangesAsync(cancellationToken);

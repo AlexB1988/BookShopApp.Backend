@@ -16,9 +16,9 @@ namespace BookShopApp.Persistence
         public DbSet<Author> Authors { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
         public DbSet<BookPrice> Prices {get;set; }
-        public DbSet<BookAmount> Amounts {get;set; }
-        public DbSet<BookAuthor> BookAuthors {get;set; }
-
+        public DbSet<BookAuthor> BookAuthors { get; set; }
+        public DbSet<BookIncome> Income {get;set; }
+        public DbSet<BookCurrentAmount> CurrentAmount { get;set; }
         public DataContext(DbContextOptions<DataContext> options):base(options)
         {}
 
@@ -27,6 +27,9 @@ namespace BookShopApp.Persistence
             builder.ApplyConfiguration(new BookConfiguration());
             builder.ApplyConfiguration(new PublisherConfiguration());
             builder.ApplyConfiguration(new AuthorConfiguration());
+            builder.ApplyConfiguration(new BookIncomeConfiguration());
+            builder.ApplyConfiguration(new BookCurrentAmountConfiguration());
+            builder.ApplyConfiguration(new BookPriceConfiguration());
             base.OnModelCreating(builder);
         }
     }
