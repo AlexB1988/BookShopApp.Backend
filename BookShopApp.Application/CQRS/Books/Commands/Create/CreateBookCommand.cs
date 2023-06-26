@@ -16,6 +16,7 @@ namespace BookShopApp.Application.CQRS.Books.Commands.CreateBook
         public int PublisherId { get; set; }
         public int BookIncomeAmount { get; set; }
         public decimal BookIncomePrice { get; set; }
+        public decimal CurrentPrice { get; set; }
         public IList<int> Authors { get; set; }
     }
 }

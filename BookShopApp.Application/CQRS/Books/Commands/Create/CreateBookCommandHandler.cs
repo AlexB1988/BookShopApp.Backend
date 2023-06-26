@@ -47,6 +47,13 @@ namespace BookShopApp.Application.CQRS.Books.Commands.CreateBook
                 CurrentAmount = request.BookIncomeAmount
             };
 
+            var entityPrice = new BookPrice
+            {
+                Book = entityBook,
+                Price = request.CurrentPrice,
+                DateBegin = DateTime.UtcNow
+            };
+
             var entitiesAuthors = new List<BookAuthor>();
 
             var authorList = await _dataContext.Authors.Select(author=>author.Id).ToListAsync(cancellationToken);
@@ -69,6 +76,7 @@ namespace BookShopApp.Application.CQRS.Books.Commands.CreateBook
             await _dataContext.Books.AddAsync(entityBook,cancellationToken);
             await _dataContext.Income.AddAsync(entityBookIncome,cancellationToken);
             await _dataContext.CurrentAmount.AddAsync(entityCurrentAmount, cancellationToken);
+            await _dataContext.Prices.AddAsync(entityPrice, cancellationToken);
             await _dataContext.BookAuthors.AddRangeAsync(entitiesAuthors, cancellationToken);
 
             await _dataContext.SaveChangesAsync(cancellationToken);
