@@ -22,9 +22,10 @@ namespace BookShopApp.Application.CQRS.Price.Commands.Create
         public async Task<int> Handle(CreatePriceCommand request, CancellationToken cancellationToken)
         {
             var lastPrice = await _dataContext.Prices.FirstOrDefaultAsync(price => price.BookId == request.BookId && price.DateEnd == null,cancellationToken);
-
-            lastPrice.DateEnd = DateTime.UtcNow;
-
+            if(lastPrice != null)
+            {
+                lastPrice.DateEnd = DateTime.UtcNow;
+            }
             var entityPrice = new BookPrice
             {
                 BookId = request.BookId,

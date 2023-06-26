@@ -8,5 +8,6 @@ namespace BookShopApp.Application.CQRS.Price.Queries.GetBookPriceList
 {
     public class BookPriceListViewModel
     {
+        public IList<BookPriceDto> BookPriceList { get; set; }
     }
 }

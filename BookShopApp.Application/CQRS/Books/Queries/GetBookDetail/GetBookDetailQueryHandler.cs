@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BookShopApp.Application.Common.Exceptions;
+using BookShopApp.Application.Common.Mappings.DTOs;
 using BookShopApp.Application.Interfaces;
 using BookShopApp.Domain;
 using MediatR;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace BookShopApp.Application.CQRS.Books.Queries.GetBookDetail
 {
-    public class GetBookDetailQueryHandler : IRequestHandler<GetBookDetailQuery, BookViewModel>
+    public class GetBookDetailQueryHandler : IRequestHandler<GetBookDetailQuery, BookLookupDto>
     {
         public IDataContext _dataContext;
         public IMapper _mapper;
@@ -23,7 +24,7 @@ namespace BookShopApp.Application.CQRS.Books.Queries.GetBookDetail
             _mapper = mapper;
         }
 
-        public async Task<BookViewModel> Handle(GetBookDetailQuery request, CancellationToken cancellationToken)
+        public async Task<BookLookupDto> Handle(GetBookDetailQuery request, CancellationToken cancellationToken)
         {
             var entity =await _dataContext.Books.FirstOrDefaultAsync(book => book.Id == request.Id,cancellationToken);
 
@@ -32,7 +33,7 @@ namespace BookShopApp.Application.CQRS.Books.Queries.GetBookDetail
                 throw new NotFoundException(nameof(Book), request.Id);
             }
 
-            var result= _mapper.Map<BookViewModel>(entity);
+            var result= _mapper.Map<BookLookupDto>(entity);
             result.Authors = await _dataContext.Authors
                 .Include(author => author.BookAuthors.Where(book => book.BookId == request.Id))
                 .Select(author => author.Name)

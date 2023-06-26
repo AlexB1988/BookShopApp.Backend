@@ -15,7 +15,8 @@ namespace BookShopApp.Application.CQRS.Books.Queries.GetBookDetail
         public string Name { get; set; }
         public int Year { get; set; }
         public string PublisherName { get; set; }
-        public IList<string> Authors { get; set; } //Реализовать маппинг листа авторов
+        public decimal Price { get; set; }
+        //public IList<int> Authors { get; set; } //Реализовать маппинг листа авторов
 
         public void Mapping(Profile profile)
         {
@@ -27,9 +28,12 @@ namespace BookShopApp.Application.CQRS.Books.Queries.GetBookDetail
                 .ForMember(bookVm => bookVm.Year,
                     opt => opt.MapFrom(book => book.Year))
                 .ForMember(bookVm => bookVm.PublisherName,
-                    opt => opt.MapFrom(book => book.Publisher.Name));
-                //.ForMember(bookVm=>bookVm.Authors,
-                //    opt=>opt.MapFrom(book=>book.));
+                    opt => opt.MapFrom(book => book.Publisher.Name))
+                .ForMember(bookDto => bookDto.Price,
+                    opt => opt.MapFrom(book => book.Price.Where(book => book.Id == Id && book.DateEnd == null).FirstOrDefault()));
+            //.ForMember(bookVm => bookVm.Authors,
+            //    opt => opt.MapFrom(book => book.BookAuthors
+            //            .Where(book=>book.BookId==Id).Select(author=>author.AuthorId).ToList()));
         }
     }
 }
