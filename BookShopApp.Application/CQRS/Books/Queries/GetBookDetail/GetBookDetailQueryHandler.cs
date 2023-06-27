@@ -34,10 +34,10 @@ namespace BookShopApp.Application.CQRS.Books.Queries.GetBookDetail
             }
 
             var result= _mapper.Map<BookLookupDto>(entity);
-            result.Authors = await _dataContext.Authors
-                .Include(author => author.BookAuthors.Where(book => book.BookId == request.Id))
-                .Select(author => author.Name)
-                .ToListAsync(cancellationToken);
+            //result.Authors = await _dataContext.Authors
+            //    .Include(author => author.BookAuthors.Where(book => book.BookId == request.Id))
+            //    .Select(author => author.Name)
+            //    .ToListAsync(cancellationToken);
 
             return result;  
         }

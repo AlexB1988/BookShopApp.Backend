@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BookShopApp.Application.CommandsQueries.Authors.Queries.GetAuthorList;
 using BookShopApp.Application.Common.Mappings;
 using BookShopApp.Domain;
 using System;
@@ -15,8 +16,8 @@ namespace BookShopApp.Application.Common.Mappings.DTOs
         public string Name { get; set; }
         public int Year { get; set; }
         public string Publisher { get; set; }
-        //public decimal Price { get; set; }
-        //public IList<string> Authors { get; set; }
+        public decimal Price { get; set; }
+        public IList<AuthorLookupDto> Authors { get; set; }
 
         public void Mapping(Profile profile)
         {
@@ -28,7 +29,12 @@ namespace BookShopApp.Application.Common.Mappings.DTOs
                 .ForMember(bookDto => bookDto.Year,
                     opt => opt.MapFrom(book => book.Year))
                 .ForMember(bookDto => bookDto.Publisher,
-                    opt => opt.MapFrom(book => book.Publisher.Name));
-        }
+                    opt => opt.MapFrom(book => book.Publisher.Name))
+                .ForMember(bookDto => bookDto.Price,
+                    opt => opt.MapFrom(book => book.Price
+                                        .FirstOrDefault(price=>price.DateEnd==null).Price))
+                .ForMember(bookDto=>bookDto.Authors,
+                    opt=>opt.MapFrom(book=>book.BookAuthors.Select(author=>author.Author).ToList()));
+        }//////////Нужно смаппить список авторов
     }
 }
