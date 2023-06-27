@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace BookShopApp.Application.CQRS.Publishers.Queries.GetPublisherList
 {
-    public class GetPublisherListQueryHandler : IRequestHandler<GetPublisherListQuery, PublisherListViewModel>
+    public class GetPublisherListQueryHandler : IRequestHandler<GetPublisherListQuery, GetPublisherListViewModel>
     {
         private readonly IDataContext _dataContext;
         private readonly IMapper _mapper;
@@ -24,13 +24,13 @@ namespace BookShopApp.Application.CQRS.Publishers.Queries.GetPublisherList
             _mapper = mapper;
         }
 
-        public async Task<PublisherListViewModel> Handle(GetPublisherListQuery request, CancellationToken cancellationToken)
+        public async Task<GetPublisherListViewModel> Handle(GetPublisherListQuery request, CancellationToken cancellationToken)
         {
             var entity =await _dataContext.Publishers
                 .ProjectTo<PublisherLookupDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
 
-            return new PublisherListViewModel { Publishers = entity };
+            return new GetPublisherListViewModel { Publishers = entity };
         }
     }
 }

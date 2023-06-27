@@ -12,6 +12,6 @@ namespace BookShopApp.Application.CQRS.Publishers.Commands.CreatePublisher
         public int Id { get; set; }
         public string Name { get; set; }
         public string City { get; set; }
-        public DateTime DateBegin { get; set; }
+        public int YearBegin { get; set; }
     }
 }

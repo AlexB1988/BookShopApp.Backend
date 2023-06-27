@@ -13,6 +13,7 @@ namespace BookShopApp.Persistence.EntityTypeConfiguration
     {
         public void Configure(EntityTypeBuilder<BookCurrentAmount> builder)
         {
+            builder.HasKey(amount => new { amount.BookId });
             builder.HasOne(amount => amount.Book)
                 .WithOne(book => book.Amount)
                 .HasForeignKey<BookCurrentAmount>(amount => amount.BookId);

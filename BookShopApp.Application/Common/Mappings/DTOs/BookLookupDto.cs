@@ -15,8 +15,8 @@ namespace BookShopApp.Application.Common.Mappings.DTOs
         public string Name { get; set; }
         public int Year { get; set; }
         public string Publisher { get; set; }
-        public decimal Price { get; set; }
-        public IList<string> Authors { get; set; }
+        //public decimal Price { get; set; }
+        //public IList<string> Authors { get; set; }
 
         public void Mapping(Profile profile)
         {
@@ -28,9 +28,7 @@ namespace BookShopApp.Application.Common.Mappings.DTOs
                 .ForMember(bookDto => bookDto.Year,
                     opt => opt.MapFrom(book => book.Year))
                 .ForMember(bookDto => bookDto.Publisher,
-                    opt => opt.MapFrom(book => book.Publisher.Name))
-                .ForMember(bookDto => bookDto.Price,
-                    opt => opt.MapFrom(book => book.Price.Where(book=>book.Id==Id && book.DateEnd ==null).FirstOrDefault()));
+                    opt => opt.MapFrom(book => book.Publisher.Name));
         }
     }
 }

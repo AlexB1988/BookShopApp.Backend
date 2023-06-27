@@ -24,7 +24,7 @@ namespace BookShopApp.Application.CQRS.Publishers.Commands.CreatePublisher
             {
                 Name = request.Name,
                 City= request.City,
-                DateBegin= request.DateBegin
+                YearBegin= request.YearBegin
             };
             await _dataContext.Publishers.AddAsync(entity, cancellationToken);
             await _dataContext.SaveChangesAsync(cancellationToken);

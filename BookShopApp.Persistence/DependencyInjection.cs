@@ -13,15 +13,14 @@ namespace BookShopApp.Persistence
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddPersistence(this IServiceCollection services
-            ,IConfiguration configuration)
+        public static IServiceCollection AddPersistence(this IServiceCollection services,
+            IConfiguration configuration)
         {
-            var connectuonString = configuration["ConnectionString"];
-            services.AddDbContext<DataContext>(options=>
+            var connectionString = configuration["Db"];
+            services.AddDbContext<DataContext>(options =>
             {
-                options.UseNpgsql(connectuonString);
+                options.UseNpgsql(connectionString, x => x.MigrationsAssembly("BookShopApp.WebApi"));
             });
-
             services.AddScoped<IDataContext>(provider => provider.GetService<DataContext>());
 
             return services;

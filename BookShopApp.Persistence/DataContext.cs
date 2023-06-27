@@ -30,6 +30,7 @@ namespace BookShopApp.Persistence
             builder.ApplyConfiguration(new BookIncomeConfiguration());
             builder.ApplyConfiguration(new BookCurrentAmountConfiguration());
             builder.ApplyConfiguration(new BookPriceConfiguration());
+            builder.ApplyConfiguration(new BookAuthorConfiguration());
             base.OnModelCreating(builder);
         }
     }

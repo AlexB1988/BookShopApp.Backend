@@ -9,7 +9,7 @@ namespace BookShopApp.Domain
     public class Publisher:BaseEntity
     {
         public string City { get; set; }
-        public DateTime DateBegin { get; set; }
+        public int YearBegin { get; set; }
         public ICollection<Book> Books { get; set;}
     }
 }

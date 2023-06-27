@@ -1,6 +1,7 @@
 ﻿using BookShopApp.Application.Interfaces;
 using BookShopApp.Domain;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,9 @@ namespace BookShopApp.Application.CQRS.Income.Create
                 Amount = request.Amount,
                 IncomePrice = request.IncomePrice
             };
+
+            var currentAmount = await _dataContext.CurrentAmount.FirstOrDefaultAsync(amount=>amount.BookId==request.BookId);
+            currentAmount.CurrentAmount += request.Amount;
 
             await _dataContext.Income.AddAsync(newIncome,cancellationToken);
             await _dataContext.SaveChangesAsync(cancellationToken);

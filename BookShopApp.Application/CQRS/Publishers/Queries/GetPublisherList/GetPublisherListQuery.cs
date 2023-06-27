@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookShopApp.Application.CQRS.Publishers.Queries.GetPublisherList
 {
-    public class GetPublisherListQuery:IRequest<PublisherListViewModel>
+    public class GetPublisherListQuery:IRequest<GetPublisherListViewModel>
     {
     }
 }

@@ -11,16 +11,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D29328E5-9520-4F0F-8E2C-26C81057DCC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookShopApp.Domain", "BookShopApp.Domain\BookShopApp.Domain.csproj", "{666DD107-D2A7-483A-905E-A845865275DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookShopApp.Domain", "BookShopApp.Domain\BookShopApp.Domain.csproj", "{666DD107-D2A7-483A-905E-A845865275DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookShopApp.Application", "BookShopApp.Application\BookShopApp.Application.csproj", "{A0AA778F-FBDC-4349-81B0-03C0C7EC5FDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookShopApp.Application", "BookShopApp.Application\BookShopApp.Application.csproj", "{A0AA778F-FBDC-4349-81B0-03C0C7EC5FDB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookShopApp.Persistence", "BookShopApp.Persistence\BookShopApp.Persistence.csproj", "{868DD0A6-FDD9-4539-9825-64C296A8E121}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookShopApp.Persistence", "BookShopApp.Persistence\BookShopApp.Persistence.csproj", "{868DD0A6-FDD9-4539-9825-64C296A8E121}"
 	ProjectSection(ProjectDependencies) = postProject
 		{A0AA778F-FBDC-4349-81B0-03C0C7EC5FDB} = {A0AA778F-FBDC-4349-81B0-03C0C7EC5FDB}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookShopApp.WebApi", "BookShopApp.WebApi\BookShopApp.WebApi.csproj", "{03D35CFA-AE9E-4DC4-8F64-CBB8ACD968B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookShopApp.WebApi", "BookShopApp.WebApi\BookShopApp.WebApi.csproj", "{03D35CFA-AE9E-4DC4-8F64-CBB8ACD968B0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{868DD0A6-FDD9-4539-9825-64C296A8E121} = {868DD0A6-FDD9-4539-9825-64C296A8E121}
+		{A0AA778F-FBDC-4349-81B0-03C0C7EC5FDB} = {A0AA778F-FBDC-4349-81B0-03C0C7EC5FDB}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

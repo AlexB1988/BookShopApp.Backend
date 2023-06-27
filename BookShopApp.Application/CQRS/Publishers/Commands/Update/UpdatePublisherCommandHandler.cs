@@ -29,7 +29,7 @@ namespace BookShopApp.Application.CQRS.Publishers.Commands.UpdatePublisher
             }
 
             entity.Name = request.Name;
-            entity.DateBegin = request.DateBegin;
+            entity.YearBegin = request.YearBegin;
             entity.City = request.City;
 
             await _dataContext.SaveChangesAsync(cancellationToken);

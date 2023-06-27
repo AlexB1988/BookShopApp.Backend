@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BookShopApp.Application.Common.Mappings;
 using BookShopApp.Domain;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BookShopApp.Application.CommandsQueries.Authors.Queries.GetAuthorBiography
 {
-    public class AuthorDetailsViewModel
+    public class AuthorDetailsViewModel:IMapWith<Author>
     {
         public int Id { get; set; }
         public string Name { get; set; }
