@@ -20,6 +20,7 @@ namespace BookShopApp.WebApi.Controllers
             _mapper = mapper;
         }
 
+        [HttpGet]
         public async Task<ActionResult<BookListViewModel>> GetAll()
         {
             var query=new GetBookListQuery();

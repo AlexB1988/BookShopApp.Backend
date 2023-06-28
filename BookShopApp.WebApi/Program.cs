@@ -2,6 +2,7 @@ using BookShopApp.Application;
 using BookShopApp.Application.Common.Mappings;
 using BookShopApp.Application.Interfaces;
 using BookShopApp.Persistence;
+using BookShopApp.WebApi.Middleware;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +27,7 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -33,6 +35,13 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 
+app.UseSwagger();
+app.UseSwaggerUI(config =>
+{
+    config.RoutePrefix = string.Empty;
+    config.SwaggerEndpoint("swagger/v1/swagger.json", "BookShopApp API");
+});
+app.UseCustomExceptionHandler();
 app.UseRouting();
 
 app.UseHttpsRedirection();
