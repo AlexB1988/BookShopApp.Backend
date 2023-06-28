@@ -32,9 +32,7 @@ namespace BookShopApp.Application.Common.Mappings.DTOs
                     opt => opt.MapFrom(book => book.Publisher.Name))
                 .ForMember(bookDto => bookDto.Price,
                     opt => opt.MapFrom(book => book.Price
-                                        .FirstOrDefault(price=>price.DateEnd==null).Price))
-                .ForMember(bookDto=>bookDto.Authors,
-                    opt=>opt.MapFrom(book=>book.BookAuthors.Select(author=>author.Author).ToList()));
+                                        .FirstOrDefault(price=>price.DateEnd==null).Price));
         }//////////Нужно смаппить список авторов
     }
 }
