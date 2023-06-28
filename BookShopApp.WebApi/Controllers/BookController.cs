@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BookShopApp.Application.CQRS.Books.Queries.GetBookDetail;
 using BookShopApp.Application.CQRS.Books.Queries.GetBookList;
 using BookShopApp.Application.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -21,6 +22,19 @@ namespace BookShopApp.WebApi.Controllers
 
             return Ok(vm);
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<BookViewModel>> Get(int id)
+        {
+            var query = new GetBookDetailQuery
+            {
+                Id = id
+            };
+            var vm = await Mediator.Send(query);
+
+            return Ok(vm);
+        }
+
 
 
     }
