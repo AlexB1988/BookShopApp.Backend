@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookShopApp.Application.Authors.Commands.CreateAuthor
+namespace BookShopApp.Application.Authors.Commands.Create
 {
     public class CreateAuthorCommand : IRequest<int>
     {

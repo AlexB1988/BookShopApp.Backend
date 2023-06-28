@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookShopApp.Application.CQRS.Books.Commands.DeleteBook
+namespace BookShopApp.Application.CQRS.Books.Commands.Delete
 {
     public class DeleteBookCommandHandler : IRequestHandler<DeleteBookCommand, Unit>
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookShopApp.Application.CQRS.Publishers.Commands.CreatePublisher
+namespace BookShopApp.Application.CQRS.Publishers.Commands.Create
 {
     public class CreatePublisherCommand : IRequest<int>
     {

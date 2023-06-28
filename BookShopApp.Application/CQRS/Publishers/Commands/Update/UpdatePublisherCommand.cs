@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookShopApp.Application.CQRS.Publishers.Commands.UpdatePublisher
+namespace BookShopApp.Application.CQRS.Publishers.Commands.Update
 {
     public class UpdatePublisherCommand:IRequest<Unit>
     {

@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookShopApp.Application.CQRS.Books.Commands.UpdateBook
+namespace BookShopApp.Application.CQRS.Books.Commands.Update
 {
     public class UpdateBookCommandHandler : IRequestHandler<UpdateBookCommand, Unit>
     {
@@ -49,5 +49,7 @@ namespace BookShopApp.Application.CQRS.Books.Commands.UpdateBook
 
             return Unit.Value;
         }
+
+        
     }
 }

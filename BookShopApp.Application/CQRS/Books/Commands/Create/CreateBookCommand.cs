@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookShopApp.Application.CQRS.Books.Commands.CreateBook
+namespace BookShopApp.Application.CQRS.Books.Commands.Create
 {
     public class CreateBookCommand:IRequest<int>
     {

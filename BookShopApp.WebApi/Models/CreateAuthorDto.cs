@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using BookShopApp.Application.Authors.Commands.CreateAuthor;
+using BookShopApp.Application.Authors.Commands.Create;
 using BookShopApp.Application.Common.Mappings;
 
 namespace BookShopApp.WebApi.Models

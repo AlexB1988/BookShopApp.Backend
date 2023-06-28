@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using BookShopApp.Application.CQRS.Publishers.Commands.CreatePublisher;
-using BookShopApp.Application.CQRS.Publishers.Commands.DeletePublisher;
-using BookShopApp.Application.CQRS.Publishers.Commands.UpdatePublisher;
+using BookShopApp.Application.CQRS.Publishers.Commands.Create;
+using BookShopApp.Application.CQRS.Publishers.Commands.Delete;
+using BookShopApp.Application.CQRS.Publishers.Commands.Update;
 using BookShopApp.Application.CQRS.Publishers.Queries.GetPublisherDetails;
 using BookShopApp.Application.CQRS.Publishers.Queries.GetPublisherList;
 using BookShopApp.WebApi.Models;

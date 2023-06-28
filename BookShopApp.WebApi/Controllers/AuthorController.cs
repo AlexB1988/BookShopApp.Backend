@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using BookShopApp.Application.Authors.Commands.CreateAuthor;
-using BookShopApp.Application.CommandsQueries.Authors.Commands.DeleteAuthor;
+using BookShopApp.Application.Authors.Commands.Create;
+using BookShopApp.Application.CommandsQueries.Authors.Commands.Delete;
 using BookShopApp.Application.CommandsQueries.Authors.Queries.GetAuthorBiography;
 using BookShopApp.Application.CommandsQueries.Authors.Queries.GetAuthorList;
-using BookShopApp.Application.CQRS.Authors.Commands.UpdateAuthor;
+using BookShopApp.Application.CQRS.Authors.Commands.Update;
 using BookShopApp.WebApi.Models;
 using Microsoft.AspNetCore.Mvc;
 

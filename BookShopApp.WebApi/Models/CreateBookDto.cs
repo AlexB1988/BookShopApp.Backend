@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using BookShopApp.Application.CommandsQueries.Authors.Queries.GetAuthorList;
 using BookShopApp.Application.Common.Mappings;
-using BookShopApp.Application.CQRS.Books.Commands.CreateBook;
+using BookShopApp.Application.CQRS.Books.Commands.Create;
 
 namespace BookShopApp.WebApi.Models
 {

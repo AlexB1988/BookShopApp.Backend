@@ -10,7 +10,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookShopApp.Application.CQRS.Books.Commands.CreateBook
+namespace BookShopApp.Application.CQRS.Books.Commands.Create
 {
     public class CreateBookCommandHandler : IRequestHandler<CreateBookCommand, int>
     {
@@ -23,15 +23,17 @@ namespace BookShopApp.Application.CQRS.Books.Commands.CreateBook
 
         public async Task<int> Handle(CreateBookCommand request, CancellationToken cancellationToken)
         {
-            if(await _dataContext.Publishers.FirstOrDefaultAsync(publisher => publisher.Id == request.Id) == null)
+            if(await _dataContext.Publishers.FirstOrDefaultAsync(publisher => publisher.Id == request.PublisherId) == null)
             {
                 throw new NotFoundException(nameof(Publisher), request.PublisherId);
             }
+
+            var entityPublisher = await _dataContext.Publishers.FirstOrDefaultAsync(publisher => publisher.Id == request.PublisherId, cancellationToken);
             var entityBook = new Book
             {
                 Name = request.Name,
                 Year = request.Year,
-                PublisherId= request.PublisherId
+                Publisher=entityPublisher
             };
 
             var entityBookIncome = new BookIncome
@@ -56,13 +58,13 @@ namespace BookShopApp.Application.CQRS.Books.Commands.CreateBook
 
             var entitiesAuthors = new List<BookAuthor>();
 
-            var authorList = await _dataContext.Authors.Select(author=>author.Id).ToListAsync(cancellationToken);
+            //var authorList = await _dataContext.Authors.Select(author=>author.Id).ToListAsync(cancellationToken);
             
             //Проверить на корректность
-            if (request.Authors.Except(authorList) !=null)
-            {
-                throw new NotFoundException(nameof(Author), request.Authors);
-            }
+            //if (request.Authors.Except(authorList).Count !=null)
+            //{
+            //    throw new NotFoundException(nameof(Author), request.Authors);
+            //}
 
             foreach(var author in request.Authors)
             {
