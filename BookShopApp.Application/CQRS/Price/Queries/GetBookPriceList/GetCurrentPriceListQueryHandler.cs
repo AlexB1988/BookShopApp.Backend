@@ -11,24 +11,24 @@ using System.Threading.Tasks;
 
 namespace BookShopApp.Application.CQRS.Price.Queries.GetBookPriceList
 {
-    public class GetBookPriceListQueryHandler : IRequestHandler<GetBookPriceListQuery, BookPriceListViewModel>
+    public class GetCurrentPriceListQueryHandler : IRequestHandler<GetCurrentPriceListQuery, CurrentPriceListViewModel>
     {
         private readonly IDataContext _dataContext;
         private readonly IMapper _mapper;
-        public GetBookPriceListQueryHandler(IDataContext dataContext, IMapper mapper)
+        public GetCurrentPriceListQueryHandler(IDataContext dataContext, IMapper mapper)
         {
             _dataContext = dataContext;
             _mapper = mapper;
         }
 
-        public async Task<BookPriceListViewModel> Handle(GetBookPriceListQuery request, CancellationToken cancellationToken)
+        public async Task<CurrentPriceListViewModel> Handle(GetCurrentPriceListQuery request, CancellationToken cancellationToken)
         {
             var entityPriceList = await _dataContext.Prices
                 .Where(price => price.DateEnd == null)
                 .ProjectTo<BookPriceDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
 
-            return new BookPriceListViewModel { BookPriceList=entityPriceList };
+            return new CurrentPriceListViewModel { BookPriceList=entityPriceList };
         }
     }
 }

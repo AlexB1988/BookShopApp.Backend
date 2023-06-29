@@ -9,6 +9,7 @@ namespace BookShopApp.Application.CQRS.Price.Commands.Update
 {
     public class UpdatePriceCommand:IRequest<Unit>
     {
+        public int Id { get; set; }
         public int BookId { get; set; }
         public decimal Price { get; set; }
     }
