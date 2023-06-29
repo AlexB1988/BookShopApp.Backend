@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace BookShopApp.Application.CommandsQueries.Authors.Queries.GetAuthorBiography
 {
-    public class GetAuthorDetailsHandler:IRequestHandler<GetAuthorDetailsQuery,AuthorDetailsViewModel>
+    public class GetAuthorDetailsQueryHandler:IRequestHandler<GetAuthorDetailsQuery,AuthorDetailsViewModel>
     {
         private readonly IDataContext _dataContext;
         private readonly IMapper _mapper;
 
-        public GetAuthorDetailsHandler(IDataContext dataContext, IMapper mapper)
+        public GetAuthorDetailsQueryHandler(IDataContext dataContext, IMapper mapper)
         {
             _dataContext = dataContext;
             _mapper = mapper;

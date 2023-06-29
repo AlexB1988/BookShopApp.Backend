@@ -18,6 +18,7 @@ namespace BookShopApp.Application.Interfaces
         DbSet<BookIncome> Income { get; set; }
         DbSet<BookCurrentAmount> CurrentAmount { get; set; }
 
+        public int SaveChanges();
         public Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

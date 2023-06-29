@@ -2,6 +2,7 @@ using BookShopApp.Application;
 using BookShopApp.Application.Common.Mappings;
 using BookShopApp.Application.Interfaces;
 using BookShopApp.Persistence;
+using BookShopApp.WebApi;
 using BookShopApp.WebApi.Middleware;
 using System.Reflection;
 
@@ -30,8 +31,21 @@ builder.Services.AddCors(options =>
 builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
+void SeedData(IHost app)
+{
+    var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
+    using (var scope = scopedFactory.CreateScope())
+    {
+        var service = scope.ServiceProvider.GetService<Seed>();
+        service.SeedDataContext();
+    }
+}
+
+
+
 if (app.Environment.IsDevelopment())
 {
+    SeedData(app);
     app.UseDeveloperExceptionPage();
 }
 
