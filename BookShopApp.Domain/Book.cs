@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-// test comment
-
 namespace BookShopApp.Domain
 {
     public class Book:BaseEntity

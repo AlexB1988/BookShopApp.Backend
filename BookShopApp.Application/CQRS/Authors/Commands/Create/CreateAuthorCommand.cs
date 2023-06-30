@@ -12,6 +12,7 @@ namespace BookShopApp.Application.Authors.Commands.Create
 {
     public class CreateAuthorCommand : IRequest<int>
     {
+        // TODO: На создание айдишник не нужен, он сам сгенерится (если ты указал в конфигураторе)
         public int Id { get; set; }
         public string Name { get; set; }
         public string Biography { get; set; }

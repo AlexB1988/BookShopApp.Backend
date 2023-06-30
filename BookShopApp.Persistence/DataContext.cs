@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,6 +25,8 @@ namespace BookShopApp.Persistence
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            // TODO: Здесь можно обойтись одной строкой, нужно просто указать сборку, в которой хранятся конфигураторы.
+            // builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly()); Берет из текущей сборки, тк конфиги у тебя находятся в этом же прожекте
             builder.ApplyConfiguration(new BookConfiguration());
             builder.ApplyConfiguration(new PublisherConfiguration());
             builder.ApplyConfiguration(new AuthorConfiguration());

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace BookShopApp.Persistence
 {
+    // TODO: Этот класс должен быть в каждом прожекте, где есть зависимости, например в апкликейшене AddApplication, и там в нем регаются все зависимости, например маппер, медиатор и тд
     public static class DependencyInjection
     {
         public static IServiceCollection AddPersistence(this IServiceCollection services,

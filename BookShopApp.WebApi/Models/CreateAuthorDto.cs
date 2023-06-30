@@ -4,6 +4,8 @@ using BookShopApp.Application.Common.Mappings;
 
 namespace BookShopApp.WebApi.Models
 {
+    // TODO: Все эти ДТОхи не нужны, у тебя команда выполняет их роль
+    // TODO: Более того, папка называется Models, а хранишь ты здесь DTO
     public class CreateAuthorDto:IMapWith<CreateAuthorCommand>
     {
         public string Name { get; set; }
@@ -11,6 +13,7 @@ namespace BookShopApp.WebApi.Models
 
         public void Mapping(Profile profile)
         {
+            // TODO: Если поля называются одинаково, необязательно явно указывать, автомаппер сам поймет
             profile.CreateMap<CreateAuthorDto, CreateAuthorCommand>()
                 .ForMember(authorCommand => authorCommand.Name,
                     opt => opt.MapFrom(authorDto => authorDto.Name))

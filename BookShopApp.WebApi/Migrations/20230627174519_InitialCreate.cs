@@ -6,6 +6,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace BookShopApp.WebApi.Migrations
 {
+    // TODO: Миграции должны быть в проекте инфрастуктуры, и для них отдельная папка должны быть.
+    // Здесь их вообще не должно быть, нарушение архитектуры.
+    // ПС возможно он у тебя сам сюда автоматом их сгенерил, в таком случае надо явно указывать путь, когда миграцию делаешь
+
     /// <inheritdoc />
     public partial class InitialCreate : Migration
     {

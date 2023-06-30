@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace BookShopApp.Persistence.EntityTypeConfiguration
 {
+    // TODO: Так правильно, но мы пишем конфигураторы в файлах сущностей. Да, нарушение, но так удобнее и понятно сразу, что к чему, можно закрыть глаза.
     public class AuthorConfiguration : IEntityTypeConfiguration<Author>
     {
         public void Configure(EntityTypeBuilder<Author> builder)
