@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,13 +25,7 @@ namespace BookShopApp.Persistence
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.ApplyConfiguration(new BookConfiguration());
-            builder.ApplyConfiguration(new PublisherConfiguration());
-            builder.ApplyConfiguration(new AuthorConfiguration());
-            builder.ApplyConfiguration(new BookIncomeConfiguration());
-            builder.ApplyConfiguration(new BookCurrentAmountConfiguration());
-            builder.ApplyConfiguration(new BookPriceConfiguration());
-            builder.ApplyConfiguration(new BookAuthorConfiguration());
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(builder);
         }
     }
