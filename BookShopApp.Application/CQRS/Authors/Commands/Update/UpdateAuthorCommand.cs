@@ -1,14 +1,12 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using BookShopApp.Application.Common.Mappings;
+using BookShopApp.Domain.Entities;
+using MediatR;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookShopApp.Application.CQRS.Authors.Commands.Update
 {
-    public class UpdateAuthorCommand:IRequest<Unit>
+    public class UpdateAuthorCommand : IRequest<Unit>
     {
         [JsonIgnore]
         public int Id { get; set; }

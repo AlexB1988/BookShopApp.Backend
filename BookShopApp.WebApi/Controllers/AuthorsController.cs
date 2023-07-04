@@ -10,15 +10,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace BookShopApp.WebApi.Controllers
 {
     [Route("api/[controller]")]
-    public class AuthorController:BaseController
+    public class AuthorsController:BaseController
     {
-        private IMapper _mapper;
-        public AuthorController(IMapper mapper)
-        {
-            _mapper = mapper;
-        }
         [HttpGet]
-        public async Task<ActionResult<AuthorListViewModel>> GetAll()
+        public async Task<IActionResult> GetAll()
         {
             var query = new GetAuthorListQuery();
 
@@ -28,7 +23,7 @@ namespace BookShopApp.WebApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<AuthorDetailsViewModel>> Get(int Id)
+        public async Task<IActionResult> Get(int Id)
         {
             var query = new GetAuthorDetailsQuery
             {
@@ -40,19 +35,18 @@ namespace BookShopApp.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> Create([FromBody]CreateAuthorDto createAuthorDto)
+        public async Task<IActionResult> Create([FromBody] CreateAuthorCommand createAuthor)
         {
-            var command = _mapper.Map<CreateAuthorCommand>(createAuthorDto);
-            var authorId = await Mediator.Send(command);
+            var authorId = await Mediator.Send(createAuthor);
 
             return Ok(authorId);
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody]UpdateAuthorDto updateAuthorDto)
+        public async Task<IActionResult> Update(int Id, [FromBody] UpdateAuthorCommand updateAuthor)
         {
-            var command = _mapper.Map<UpdateAuthorCommand>(updateAuthorDto);
-            await Mediator.Send(command);
+            updateAuthor.Id=Id;
+            await Mediator.Send(updateAuthor);
 
             return NoContent();
         }

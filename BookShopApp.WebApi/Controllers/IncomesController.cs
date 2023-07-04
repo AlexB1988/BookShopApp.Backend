@@ -7,10 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace BookShopApp.WebApi.Controllers
 {
     [Route("api/[controller]")]
-    public class IncomeController:BaseController
+    public class IncomesController:BaseController
     {
         private readonly IMapper _mapper;
-        public IncomeController(IMapper mapper)
+        public IncomesController(IMapper mapper)
         {
             _mapper = mapper;
         }

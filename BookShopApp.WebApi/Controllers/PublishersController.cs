@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using BookShopApp.Application.CQRS.Publishers.Commands.Create;
+﻿using BookShopApp.Application.CQRS.Publishers.Commands.Create;
 using BookShopApp.Application.CQRS.Publishers.Commands.Delete;
 using BookShopApp.Application.CQRS.Publishers.Commands.Update;
 using BookShopApp.Application.CQRS.Publishers.Queries.GetPublisherDetails;
@@ -10,17 +9,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace BookShopApp.WebApi.Controllers
 {
     [Route("api/[controller]")]
-    public class PublisherController:BaseController
+    public class PublishersController:BaseController
     {
-        private IMapper _mapper;
-
-        public PublisherController(IMapper mapper)
-        {
-            _mapper = mapper;
-        }
 
         [HttpGet]
-        public async Task<ActionResult<GetPublisherListViewModel>> GetAll()
+        public async Task<IActionResult> GetAll()
         {
             var query=new GetPublisherListQuery();
             var vm=await Mediator.Send(query);
@@ -29,7 +22,7 @@ namespace BookShopApp.WebApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<PublisherDetailsViewModel>> Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
             var query =new GetPublisherDetailsQuery
             {
@@ -41,21 +34,18 @@ namespace BookShopApp.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> Create([FromBody] CreatePublisherDto publisherDto)
+        public async Task<IActionResult> Create([FromBody] CreatePublisherCommand createPublisher)
         {
-            var command =_mapper.Map<CreatePublisherCommand>(publisherDto);
-
-
-            var publisherId = await Mediator.Send(command);
+            var publisherId = await Mediator.Send(createPublisher);
 
             return Ok(publisherId);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Update([FromBody] UpdatePublisherDto publisherDto)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int Id, [FromBody] UpdatePublisherCommand updatePublisher)
         {
-            var command = _mapper.Map<UpdatePublisherCommand>(publisherDto);
-            await Mediator.Send(command);
+            updatePublisher.Id=Id;
+            await Mediator.Send(updatePublisher);
 
             return NoContent();
         }

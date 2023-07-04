@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using BookShopApp.Application.CommandsQueries.Authors.Queries.GetAuthorBiography;
+using BookShopApp.Application.Common.Mappings;
 using BookShopApp.Domain;
+using BookShopApp.Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -14,6 +16,5 @@ namespace BookShopApp.Application.Authors.Commands.Create
     {
         public string Name { get; set; }
         public string Biography { get; set; }
-
     }
 }

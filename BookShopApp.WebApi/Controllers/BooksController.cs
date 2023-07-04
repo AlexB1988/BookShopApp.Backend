@@ -12,16 +12,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace BookShopApp.WebApi.Controllers
 {
     [Route("api/[controller]")]
-    public class BookController:BaseController
+    public class BooksController:BaseController
     {
-        private IMapper _mapper;
-        public BookController(IMapper mapper)
-        {
-            _mapper = mapper;
-        }
-
         [HttpGet]
-        public async Task<ActionResult<BookListViewModel>> GetAll()
+        public async Task<IActionResult> GetAll()
         {
             var query=new GetBookListQuery();
             var vm = await Mediator.Send(query);
@@ -30,7 +24,7 @@ namespace BookShopApp.WebApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<BookLookupDto>> Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
             var query = new GetBookDetailQuery
             {
@@ -42,20 +36,18 @@ namespace BookShopApp.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> Create([FromBody] CreateBookDto bookDto)
+        public async Task<IActionResult> Create([FromBody] CreateBookCommand createBook)
         {
-            var commnd = _mapper.Map<CreateBookCommand>(bookDto);
-            var bookId = await Mediator.Send(commnd);
+            var bookId = await Mediator.Send(createBook);
 
             return Ok(bookId);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update([FromBody] UpdateBookDto bookDto)
+        public async Task<IActionResult> Update(int Id, [FromBody] UpdateBookCommand updateBook)
         {
-            var command = _mapper.Map<UpdateBookCommand>(bookDto);
-            await Mediator.Send(command);
-
+            updateBook.Id = Id;
+            await Mediator.Send(updateBook);
             return NoContent();
         }
 

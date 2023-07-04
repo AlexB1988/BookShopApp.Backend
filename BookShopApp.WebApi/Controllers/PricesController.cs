@@ -8,11 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace BookShopApp.WebApi.Controllers
 {
     [Route("api/[controller]")]
-    public class PriceController:BaseController
+    public class PricesController:BaseController
     {
         private IMapper _mapper;
 
-        public PriceController(IMapper mapper)
+        public PricesController(IMapper mapper)
         {
             _mapper = mapper;
         }
