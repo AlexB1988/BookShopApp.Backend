@@ -1,5 +1,5 @@
 ﻿using BookShopApp.Application.Interfaces;
-using BookShopApp.Domain;
+using BookShopApp.Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
