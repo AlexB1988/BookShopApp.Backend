@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using BookShopApp.Application.Common.Exceptions;
 using BookShopApp.Application.Interfaces;
-using BookShopApp.Domain;
+using BookShopApp.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;

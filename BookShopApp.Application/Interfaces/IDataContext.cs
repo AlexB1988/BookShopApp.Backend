@@ -1,4 +1,4 @@
-﻿using BookShopApp.Domain;
+﻿using BookShopApp.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

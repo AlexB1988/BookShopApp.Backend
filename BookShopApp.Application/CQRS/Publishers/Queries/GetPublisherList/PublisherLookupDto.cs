@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using BookShopApp.Application.Common.Mappings;
-using BookShopApp.Domain;
+using BookShopApp.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

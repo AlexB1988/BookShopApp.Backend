@@ -1,5 +1,5 @@
 ﻿using BookShopApp.Application.Interfaces;
-using BookShopApp.Domain;
+using BookShopApp.Domain.Entities;
 using BookShopApp.Persistence.EntityTypeConfiguration;
 using Microsoft.EntityFrameworkCore;
 using System;
