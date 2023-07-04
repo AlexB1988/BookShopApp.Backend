@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace BookShopApp.Application.CQRS.Authors.Commands.Update
 {
     public class UpdateAuthorCommand:IRequest<Unit>
     {
+        [JsonIgnore]
         public int Id { get; set; }
         public string Name { get; set; }
         public string Biography { get; set; }

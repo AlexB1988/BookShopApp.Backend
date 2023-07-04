@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace BookShopApp.Application.CQRS.Price.Commands.Update
 {
     public class UpdatePriceCommand:IRequest<Unit>
     {
+        [JsonIgnore]
         public int Id { get; set; }
         public int BookId { get; set; }
         public decimal Price { get; set; }
