@@ -10,7 +10,6 @@ namespace BookShopApp.Application.CQRS.Books.Commands.Create
 {
     public class CreateBookCommand:IRequest<int>
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public int Year { get; set; }
         public int PublisherId { get; set; }
