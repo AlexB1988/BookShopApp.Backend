@@ -3,7 +3,6 @@ using BookShopApp.Application.CQRS.Publishers.Commands.Delete;
 using BookShopApp.Application.CQRS.Publishers.Commands.Update;
 using BookShopApp.Application.CQRS.Publishers.Queries.GetPublisherDetails;
 using BookShopApp.Application.CQRS.Publishers.Queries.GetPublisherList;
-using BookShopApp.WebApi.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookShopApp.WebApi.Controllers

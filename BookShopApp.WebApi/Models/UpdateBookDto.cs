@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using BookShopApp.Application.Common.Mappings;
-using BookShopApp.Application.CQRS.Books.Commands.Create;
 using BookShopApp.Application.CQRS.Books.Commands.Update;
 
 namespace BookShopApp.WebApi.Models

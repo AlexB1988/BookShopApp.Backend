@@ -1,15 +1,10 @@
 ﻿using AutoMapper;
 using BookShopApp.Application.Common.Mappings;
 using BookShopApp.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookShopApp.Application.CQRS.Price.Queries.GetBookPriceList
 {
-    public class BookPriceDto:IMapWith<BookPrice>
+    public class BookPriceDto : IMapWith<BookPrice>
     {
         public int BookId { get; set; } 
         public string BookName { get; set; }

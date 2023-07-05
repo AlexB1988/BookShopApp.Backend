@@ -1,12 +1,4 @@
-﻿using AutoMapper;
-using BookShopApp.Application.Common.Mappings;
-using BookShopApp.Domain.Entities;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
 
 namespace BookShopApp.Application.CQRS.Publishers.Commands.Create
 {

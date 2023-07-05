@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using BookShopApp.Application.Common.Mappings;
 using BookShopApp.Application.CQRS.Income.Create;
-using BookShopApp.Application.CQRS.Publishers.Queries.GetPublisherDetails;
 
 namespace BookShopApp.WebApi.Models
 {

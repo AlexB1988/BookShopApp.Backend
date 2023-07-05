@@ -1,8 +1,4 @@
-﻿using AutoMapper;
-using BookShopApp.Application.Common.Mappings;
-using BookShopApp.Domain;
-using BookShopApp.Domain.Entities;
-using MediatR;
+﻿using MediatR;
 
 namespace BookShopApp.Application.CQRS.Books.Commands.Create
 {

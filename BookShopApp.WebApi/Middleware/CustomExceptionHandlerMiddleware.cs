@@ -1,6 +1,7 @@
 ﻿using BookShopApp.Application.Common.Exceptions;
 using FluentValidation;
 using System.Net;
+//Переделать под Newtonsoft
 using System.Text.Json;
 
 namespace BookShopApp.WebApi.Middleware

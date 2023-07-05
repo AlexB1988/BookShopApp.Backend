@@ -1,5 +1,4 @@
 ﻿using BookShopApp.Application.Interfaces;
-using BookShopApp.Domain;
 using BookShopApp.Domain.Entities;
 
 namespace BookShopApp.Application

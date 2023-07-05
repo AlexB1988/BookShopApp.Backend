@@ -2,7 +2,6 @@ using BookShopApp.Application;
 using BookShopApp.Application.Common.Mappings;
 using BookShopApp.Application.Interfaces;
 using BookShopApp.Persistence;
-using BookShopApp.WebApi;
 using BookShopApp.WebApi.Middleware;
 using System.Reflection;
 

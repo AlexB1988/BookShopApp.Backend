@@ -1,15 +1,10 @@
 ﻿using AutoMapper;
 using BookShopApp.Application.Common.Mappings;
 using BookShopApp.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookShopApp.Application.CQRS.Publishers.Queries.GetPublisherList
 {
-    public class PublisherLookupDto:IMapWith<Publisher>
+    public class PublisherLookupDto : IMapWith<Publisher>
     {
         public int Id { get; set; }
         public string Name { get; set; }

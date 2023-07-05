@@ -1,12 +1,8 @@
-﻿using AutoMapper;
-using BookShopApp.Application.Common.Mappings.DTOs;
-using BookShopApp.Application.CQRS.Books.Commands.Create;
+﻿using BookShopApp.Application.CQRS.Books.Commands.Create;
 using BookShopApp.Application.CQRS.Books.Commands.Delete;
 using BookShopApp.Application.CQRS.Books.Commands.Update;
 using BookShopApp.Application.CQRS.Books.Queries.GetBookDetail;
 using BookShopApp.Application.CQRS.Books.Queries.GetBookList;
-using BookShopApp.Application.ViewModels;
-using BookShopApp.WebApi.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookShopApp.WebApi.Controllers

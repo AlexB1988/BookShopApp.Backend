@@ -1,17 +1,10 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using BookShopApp.Application.CommandsQueries.Authors.Queries.GetAuthorList;
-using BookShopApp.Application.Common.Exceptions;
 using BookShopApp.Application.Common.Mappings.DTOs;
 using BookShopApp.Application.Interfaces;
-using BookShopApp.Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookShopApp.Application.CQRS.Books.Queries.GetBookDetail
 {

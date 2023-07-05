@@ -3,11 +3,6 @@ using BookShopApp.Application.Common.Exceptions;
 using BookShopApp.Application.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookShopApp.Application.CommandsQueries.Authors.Queries.GetAuthorBiography
 {
