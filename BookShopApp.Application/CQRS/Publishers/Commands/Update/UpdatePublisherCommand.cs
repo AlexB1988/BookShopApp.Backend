@@ -1,5 +1,8 @@
-﻿using MediatR;
+﻿using BookShopApp.Application.Common.Mappings;
+using BookShopApp.Domain.Entities;
+using MediatR;
 using Newtonsoft.Json;
+using AutoMapper;
 
 namespace BookShopApp.Application.CQRS.Publishers.Commands.Update
 {
