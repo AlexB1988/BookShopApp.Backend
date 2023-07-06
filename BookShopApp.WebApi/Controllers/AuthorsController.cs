@@ -3,13 +3,22 @@ using BookShopApp.Application.CommandsQueries.Authors.Commands.Delete;
 using BookShopApp.Application.CommandsQueries.Authors.Queries.GetAuthorBiography;
 using BookShopApp.Application.CommandsQueries.Authors.Queries.GetAuthorList;
 using BookShopApp.Application.CQRS.Authors.Commands.Update;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookShopApp.WebApi.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
-    public class AuthorsController:BaseController
+    public class AuthorsController:ControllerBase
     {
+        private readonly IMediator Mediator;
+
+        public AuthorsController(IMediator mediator)
+        {
+            Mediator = mediator;
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -23,10 +32,7 @@ namespace BookShopApp.WebApi.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int Id)
         {
-            var query = new GetAuthorDetailsQuery
-            {
-                Id = Id
-            };
+            var query = new GetAuthorDetailsQuery { Id = Id };
 
             var vm = await Mediator.Send(query); 
             return Ok(vm);
@@ -52,10 +58,7 @@ namespace BookShopApp.WebApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var command = new DeleteAuthorCommand
-            {
-                Id = id
-            };
+            var command = new DeleteAuthorCommand { Id = id };
             await Mediator.Send(command);
 
             return NoContent();

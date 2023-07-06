@@ -13,6 +13,8 @@ builder.Services.AddAutoMapper(config =>
     config.AddProfile(new AssemblyMappingProfile(typeof(IDataContext).Assembly));
 });
 
+
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
 builder.Services.AddAplication();
 builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddControllers();

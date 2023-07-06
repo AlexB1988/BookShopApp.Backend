@@ -1,4 +1,5 @@
-﻿using BookShopApp.Application.Common.Exceptions;
+﻿using AutoMapper;
+using BookShopApp.Application.Common.Exceptions;
 using BookShopApp.Application.Interfaces;
 using BookShopApp.Domain.Entities;
 using MediatR;
@@ -9,10 +10,12 @@ namespace BookShopApp.Application.CQRS.Authors.Commands.Update
     public class UpdateAuthorCommandHandler : IRequestHandler<UpdateAuthorCommand,Unit>
     {
         private readonly IDataContext _dataContext;
+        private readonly IMapper _mapper;
 
-        public UpdateAuthorCommandHandler(IDataContext dataContext)
+        public UpdateAuthorCommandHandler(IDataContext dataContext, IMapper mapper)
         {
             _dataContext = dataContext;
+            _mapper = mapper;
         }
 
         public async Task<Unit> Handle(UpdateAuthorCommand request, CancellationToken cancellationToken)
