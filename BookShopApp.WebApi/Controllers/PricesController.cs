@@ -1,20 +1,23 @@
 ﻿using AutoMapper;
 using BookShopApp.Application.CQRS.Books.Commands.Create;
+using BookShopApp.Application.CQRS.Price.Commands.Create;
 using BookShopApp.Application.CQRS.Price.Commands.Update;
 using BookShopApp.Application.CQRS.Price.Queries.GetBookPriceList;
 using BookShopApp.WebApi.Models;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookShopApp.WebApi.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
-    public class PricesController:BaseController
+    public class PricesController : ControllerBase
     {
-        private IMapper _mapper;
+        private readonly IMediator Mediator;
 
-        public PricesController(IMapper mapper)
+        public PricesController(IMediator mediator)
         {
-            _mapper = mapper;
+            Mediator = mediator;
         }
 
         [HttpGet]
@@ -27,20 +30,19 @@ namespace BookShopApp.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> Create([FromBody] CreatePriceDto priceDto)
+        public async Task<ActionResult<int>> Create([FromBody] CreatePriceCommand priceCommand)
         {
-            var command=_mapper.Map<CreateBookCommand>(priceDto);
 
-            var priceId=await Mediator.Send(command);
+            var priceId=await Mediator.Send(priceCommand);
 
             return Ok(priceId);
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update([FromBody] UpdatePriceDto priceDto)
+        [HttpPut]
+        public async Task<IActionResult> Update(int Id, [FromBody] UpdatePriceCommand priceCommand)
         {
-            var command = _mapper.Map<UpdatePriceCommand>(priceDto);
-            await Mediator.Send(command);
+            priceCommand.Id = Id;
+            await Mediator.Send(priceCommand);
 
             return NoContent();
         }

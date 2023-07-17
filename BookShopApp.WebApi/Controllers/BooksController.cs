@@ -3,13 +3,23 @@ using BookShopApp.Application.CQRS.Books.Commands.Delete;
 using BookShopApp.Application.CQRS.Books.Commands.Update;
 using BookShopApp.Application.CQRS.Books.Queries.GetBookDetail;
 using BookShopApp.Application.CQRS.Books.Queries.GetBookList;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookShopApp.WebApi.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
-    public class BooksController:BaseController
+    public class BooksController : ControllerBase
     {
+
+        private readonly IMediator Mediator;
+
+        public BooksController(IMediator mediator)
+        {
+            Mediator = mediator;
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -22,10 +32,8 @@ namespace BookShopApp.WebApi.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var query = new GetBookDetailQuery
-            {
-                Id = id
-            };
+            var query = new GetBookDetailQuery { Id = id };
+
             var vm = await Mediator.Send(query);
 
             return Ok(vm);
@@ -40,9 +48,9 @@ namespace BookShopApp.WebApi.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int Id, [FromBody] UpdateBookCommand updateBook)
+        public async Task<IActionResult> Update(int id, [FromBody] UpdateBookCommand updateBook)
         {
-            updateBook.Id = Id;
+            updateBook.Id = id;
             await Mediator.Send(updateBook);
             return NoContent();
         }

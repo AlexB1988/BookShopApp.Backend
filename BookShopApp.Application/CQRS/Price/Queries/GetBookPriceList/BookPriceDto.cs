@@ -6,6 +6,7 @@ namespace BookShopApp.Application.CQRS.Price.Queries.GetBookPriceList
 {
     public class BookPriceDto : IMapWith<BookPrice>
     {
+        public int Id { get; set; }
         public int BookId { get; set; } 
         public string BookName { get; set; }
         public decimal Price { get; set; }
@@ -13,6 +14,8 @@ namespace BookShopApp.Application.CQRS.Price.Queries.GetBookPriceList
         public void Mapping(Profile profile)
         {
             profile.CreateMap<BookPrice,BookPriceDto>()
+                .ForMember(bookPriceDto => bookPriceDto.Id,
+                    opt => opt.MapFrom(bookPrice => bookPrice.Id))
                 .ForMember(bookPriceDto => bookPriceDto.BookId,
                     opt => opt.MapFrom(bookPrice => bookPrice.Book.Id))
                 .ForMember(bookPriceDto=>bookPriceDto.BookName,

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BookShopApp.Application.Common.Exceptions;
 using BookShopApp.Application.Interfaces;
+using BookShopApp.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,7 +24,7 @@ namespace BookShopApp.Application.CommandsQueries.Authors.Queries.GetAuthorBiogr
 
             if(entity == null)
             {
-                throw new NotFoundException(nameof(entity), request.Id);
+                throw new NotFoundException(nameof(Author), request.Id);
             }
 
             return _mapper.Map<AuthorDetailsViewModel>(entity);

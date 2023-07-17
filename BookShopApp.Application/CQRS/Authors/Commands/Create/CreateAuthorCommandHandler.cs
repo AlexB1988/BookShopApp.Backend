@@ -18,11 +18,6 @@ namespace BookShopApp.Application.Authors.Commands.Create
 
         public async Task<int> Handle(CreateAuthorCommand request, CancellationToken cancellationToken)
         {
-            //var entity = new Author
-            //{
-            //    Name = request.Name,
-            //    Biography = request.Biography
-            //};
             var entity = _mapper.Map<Author>(request);
             await _dataContext.Authors.AddAsync(entity, cancellationToken);
             await _dataContext.SaveChangesAsync(cancellationToken);

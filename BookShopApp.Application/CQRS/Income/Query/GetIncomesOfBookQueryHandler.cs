@@ -19,12 +19,12 @@ namespace BookShopApp.Application.CQRS.Income.Query
 
         public async Task<GetIncomesOfBookViewModel> Handle(GetIncomesOfBookQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _dataContext.Income
+            var entities = await _dataContext.Income
                 .Where(income => income.BookId == request.BookId)
                 .ProjectTo<GetIncomeOfBookLookupDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
 
-            return new GetIncomesOfBookViewModel { Incomes = entity };
+            return new GetIncomesOfBookViewModel { Incomes = entities };
         }
     }
 }

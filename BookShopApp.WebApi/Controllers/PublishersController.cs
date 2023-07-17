@@ -3,13 +3,21 @@ using BookShopApp.Application.CQRS.Publishers.Commands.Delete;
 using BookShopApp.Application.CQRS.Publishers.Commands.Update;
 using BookShopApp.Application.CQRS.Publishers.Queries.GetPublisherDetails;
 using BookShopApp.Application.CQRS.Publishers.Queries.GetPublisherList;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookShopApp.WebApi.Controllers
 {
     [Route("api/[controller]")]
-    public class PublishersController:BaseController
+    public class PublishersController : ControllerBase//BaseController
     {
+
+        private readonly IMediator Mediator;
+
+        public PublishersController(IMediator mediator)
+        {
+            Mediator = mediator;
+        }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()

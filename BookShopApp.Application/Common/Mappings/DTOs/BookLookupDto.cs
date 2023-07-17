@@ -28,6 +28,6 @@ namespace BookShopApp.Application.Common.Mappings.DTOs
                 .ForMember(bookDto => bookDto.Price,
                     opt => opt.MapFrom(book => book.Price
                                         .FirstOrDefault(price=>price.DateEnd==null).Price));
-        }//////////Нужно смаппить список авторов
+        }
     }
 }

@@ -28,7 +28,7 @@ namespace BookShopApp.Application.CQRS.Authors.Commands.Update
             }
 
             entity.Name = request.Name;
-            entity.Biography= request.Biography;
+            entity.Biography = request.Biography;
 
             await _dataContext.SaveChangesAsync(cancellationToken);
 

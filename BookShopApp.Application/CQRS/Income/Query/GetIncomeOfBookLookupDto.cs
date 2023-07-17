@@ -12,7 +12,7 @@ namespace BookShopApp.Application.CQRS.Income.Query
         public string Book { get; set; }
         public int Amount { get; set; }
         public decimal IncomePrice { get; set; }
-        public DateTime DateIncome { get; set; } = DateTime.UtcNow;
+        public DateTime DateIncome { get; set; }
 
         public void Mapping(Profile profile)
         {
