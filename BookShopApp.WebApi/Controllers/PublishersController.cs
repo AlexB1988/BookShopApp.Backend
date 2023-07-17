@@ -48,7 +48,7 @@ namespace BookShopApp.WebApi.Controllers
             return Ok(publisherId);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task<IActionResult> Update(int Id, [FromBody] UpdatePublisherCommand updatePublisher)
         {
             updatePublisher.Id=Id;

@@ -28,7 +28,7 @@ namespace BookShopApp.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> Create([FromBody] CreateIncomeDto incomeDto)
+        public async Task<ActionResult<int>> Create([FromBody] CreateIncomeCommand incomeDto)
         {
             var command = _mapper.Map<CreateIncomeCommand>(incomeDto);
             var incomeId = await Mediator.Send(command);
