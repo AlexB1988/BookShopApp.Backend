@@ -13,5 +13,6 @@ namespace BookShopApp.Domain.Entities
         public ICollection<BookIncome> Income { get; set; }
         public ICollection<BookPrice> Price { get; set; }
         public ICollection<BookAuthor> BookAuthors { get; set; }
+        public ICollection<Sale> Sales { get; set; }
     }
 }

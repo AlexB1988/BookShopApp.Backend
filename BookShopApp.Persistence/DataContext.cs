@@ -14,6 +14,7 @@ namespace BookShopApp.Persistence
         public DbSet<BookAuthor> BookAuthors { get; set; }
         public DbSet<BookIncome> Income {get;set; }
         public DbSet<BookCurrentAmount> CurrentAmount { get;set; }
+        public DbSet<Sale> Sales { get; set; }
         public DataContext(DbContextOptions<DataContext> options):base(options)
         {}
 

@@ -10,6 +10,7 @@ namespace BookShopApp.Application.Common.Mappings.DTOs
         public int Id { get; set; }
         public string Name { get; set; }
         public int Year { get; set; }
+        public int Amount { get; set; }
         public string Publisher { get; set; }
         public decimal Price { get; set; }
         public IList<AuthorLookupDto> Authors { get; set; }
@@ -23,6 +24,8 @@ namespace BookShopApp.Application.Common.Mappings.DTOs
                     opt => opt.MapFrom(book => book.Name))
                 .ForMember(bookDto => bookDto.Year,
                     opt => opt.MapFrom(book => book.Year))
+                .ForMember(bookDto => bookDto.Amount,
+                    opt => opt.MapFrom(book => book.Amount.CurrentAmount))
                 .ForMember(bookDto => bookDto.Publisher,
                     opt => opt.MapFrom(book => book.Publisher.Name))
                 .ForMember(bookDto => bookDto.Price,
