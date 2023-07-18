@@ -8,8 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BookShopApp.WebApi.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
-    public class PublishersController : ControllerBase//BaseController
+    public class PublishersController : ControllerBase
     {
 
         private readonly IMediator Mediator;
