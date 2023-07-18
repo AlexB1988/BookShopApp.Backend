@@ -47,10 +47,10 @@ namespace BookShopApp.WebApi.Controllers
             return Ok(authorId);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Update(int Id, [FromBody] UpdateAuthorCommand updateAuthor)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, [FromBody] UpdateAuthorCommand updateAuthor)
         {
-            updateAuthor.Id=Id;
+            updateAuthor.Id=id;
             await Mediator.Send(updateAuthor);
 
             return NoContent();

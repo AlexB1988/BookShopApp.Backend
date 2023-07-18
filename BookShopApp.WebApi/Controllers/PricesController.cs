@@ -3,7 +3,6 @@ using BookShopApp.Application.CQRS.Books.Commands.Create;
 using BookShopApp.Application.CQRS.Price.Commands.Create;
 using BookShopApp.Application.CQRS.Price.Commands.Update;
 using BookShopApp.Application.CQRS.Price.Queries.GetBookPriceList;
-using BookShopApp.WebApi.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -38,10 +37,10 @@ namespace BookShopApp.WebApi.Controllers
             return Ok(priceId);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Update(int Id, [FromBody] UpdatePriceCommand priceCommand)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, [FromBody] UpdatePriceCommand priceCommand)
         {
-            priceCommand.Id = Id;
+            priceCommand.Id = id;
             await Mediator.Send(priceCommand);
 
             return NoContent();

@@ -23,8 +23,8 @@ namespace BookShopApp.WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var query=new GetPublisherListQuery();
-            var vm=await Mediator.Send(query);
+            var query = new GetPublisherListQuery();
+            var vm = await Mediator.Send(query);
 
             return Ok(vm);
         }
@@ -32,12 +32,12 @@ namespace BookShopApp.WebApi.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var query =new GetPublisherDetailsQuery
+            var query = new GetPublisherDetailsQuery
             {
                 Id = id
             };
-            var vm=await Mediator.Send(query); 
-            
+            var vm = await Mediator.Send(query);
+
             return Ok(vm);
         }
 
@@ -49,10 +49,10 @@ namespace BookShopApp.WebApi.Controllers
             return Ok(publisherId);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Update(int Id, [FromBody] UpdatePublisherCommand updatePublisher)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, [FromBody] UpdatePublisherCommand updatePublisher)
         {
-            updatePublisher.Id=Id;
+            updatePublisher.Id=id;
             await Mediator.Send(updatePublisher);
 
             return NoContent();

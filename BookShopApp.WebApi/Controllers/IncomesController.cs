@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using BookShopApp.Application.CQRS.Income.Create;
 using BookShopApp.Application.CQRS.Income.Query;
-using BookShopApp.WebApi.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,11 +10,11 @@ namespace BookShopApp.WebApi.Controllers
     [Route("api/[controller]")]
     public class IncomesController : ControllerBase
     {
-        private readonly IMediator _mediator;
+        private readonly IMediator Mediator;
 
         public IncomesController(IMediator mediator)
         {
-            _mediator = mediator;
+            Mediator = mediator;
         }
 
         [HttpGet("{bookId}")]
