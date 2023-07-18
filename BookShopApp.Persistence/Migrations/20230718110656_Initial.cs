@@ -4,10 +4,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace BookShopApp.WebApi.Migrations
+namespace BookShopApp.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,8 +18,8 @@ namespace BookShopApp.WebApi.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Biography = table.Column<string>(type: "text", nullable: false),
-                    Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
+                    Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
+                    Biography = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -32,9 +32,9 @@ namespace BookShopApp.WebApi.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    City = table.Column<string>(type: "text", nullable: false),
-                    DateBegin = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
+                    Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
+                    City = table.Column<string>(type: "text", nullable: true),
+                    YearBegin = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -47,9 +47,9 @@ namespace BookShopApp.WebApi.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: true),
                     Year = table.Column<int>(type: "integer", nullable: false),
-                    PublisherId = table.Column<int>(type: "integer", nullable: false),
-                    Name = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false)
+                    PublisherId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -14,7 +14,7 @@ namespace BookShopApp.Persistence
             services.AddDbContext<DataContext>(options =>
             {
                 options.UseInMemoryDatabase(databaseName: "BookApp");
-                //options.UseNpgsql(connectionString, x => x.MigrationsAssembly("BookShopApp.WebApi"));
+                //options.UseNpgsql(connectionString, x => x.MigrationsAssembly("BookShopApp.Persistence"));
             });
             services.AddScoped<IDataContext>(provider => provider.GetService<DataContext>());
 

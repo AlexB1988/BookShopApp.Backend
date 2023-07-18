@@ -3,20 +3,17 @@ using System;
 using BookShopApp.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace BookShopApp.WebApi.Migrations
+namespace BookShopApp.Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230627192731_ChangePublisherDateBeginToYearBegin")]
-    partial class ChangePublisherDateBeginToYearBegin
+    partial class DataContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,7 +22,7 @@ namespace BookShopApp.WebApi.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("BookShopApp.Domain.Author", b =>
+            modelBuilder.Entity("BookShopApp.Domain.Entities.Author", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -34,11 +31,9 @@ namespace BookShopApp.WebApi.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Biography")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
@@ -50,7 +45,7 @@ namespace BookShopApp.WebApi.Migrations
                     b.ToTable("Authors");
                 });
 
-            modelBuilder.Entity("BookShopApp.Domain.Book", b =>
+            modelBuilder.Entity("BookShopApp.Domain.Entities.Book", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -59,7 +54,6 @@ namespace BookShopApp.WebApi.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("character varying(250)");
 
@@ -79,7 +73,7 @@ namespace BookShopApp.WebApi.Migrations
                     b.ToTable("Books");
                 });
 
-            modelBuilder.Entity("BookShopApp.Domain.BookAuthor", b =>
+            modelBuilder.Entity("BookShopApp.Domain.Entities.BookAuthor", b =>
                 {
                     b.Property<int>("BookId")
                         .HasColumnType("integer");
@@ -94,7 +88,7 @@ namespace BookShopApp.WebApi.Migrations
                     b.ToTable("BookAuthors");
                 });
 
-            modelBuilder.Entity("BookShopApp.Domain.BookCurrentAmount", b =>
+            modelBuilder.Entity("BookShopApp.Domain.Entities.BookCurrentAmount", b =>
                 {
                     b.Property<int>("BookId")
                         .HasColumnType("integer");
@@ -107,7 +101,7 @@ namespace BookShopApp.WebApi.Migrations
                     b.ToTable("CurrentAmount");
                 });
 
-            modelBuilder.Entity("BookShopApp.Domain.BookIncome", b =>
+            modelBuilder.Entity("BookShopApp.Domain.Entities.BookIncome", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -137,7 +131,7 @@ namespace BookShopApp.WebApi.Migrations
                     b.ToTable("Income");
                 });
 
-            modelBuilder.Entity("BookShopApp.Domain.BookPrice", b =>
+            modelBuilder.Entity("BookShopApp.Domain.Entities.BookPrice", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -167,7 +161,7 @@ namespace BookShopApp.WebApi.Migrations
                     b.ToTable("Prices");
                 });
 
-            modelBuilder.Entity("BookShopApp.Domain.Publisher", b =>
+            modelBuilder.Entity("BookShopApp.Domain.Entities.Publisher", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -176,11 +170,9 @@ namespace BookShopApp.WebApi.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("City")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
@@ -195,9 +187,9 @@ namespace BookShopApp.WebApi.Migrations
                     b.ToTable("Publishers");
                 });
 
-            modelBuilder.Entity("BookShopApp.Domain.Book", b =>
+            modelBuilder.Entity("BookShopApp.Domain.Entities.Book", b =>
                 {
-                    b.HasOne("BookShopApp.Domain.Publisher", "Publisher")
+                    b.HasOne("BookShopApp.Domain.Entities.Publisher", "Publisher")
                         .WithMany("Books")
                         .HasForeignKey("PublisherId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -206,15 +198,15 @@ namespace BookShopApp.WebApi.Migrations
                     b.Navigation("Publisher");
                 });
 
-            modelBuilder.Entity("BookShopApp.Domain.BookAuthor", b =>
+            modelBuilder.Entity("BookShopApp.Domain.Entities.BookAuthor", b =>
                 {
-                    b.HasOne("BookShopApp.Domain.Author", "Author")
+                    b.HasOne("BookShopApp.Domain.Entities.Author", "Author")
                         .WithMany("BookAuthors")
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BookShopApp.Domain.Book", "Book")
+                    b.HasOne("BookShopApp.Domain.Entities.Book", "Book")
                         .WithMany("BookAuthors")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -225,20 +217,20 @@ namespace BookShopApp.WebApi.Migrations
                     b.Navigation("Book");
                 });
 
-            modelBuilder.Entity("BookShopApp.Domain.BookCurrentAmount", b =>
+            modelBuilder.Entity("BookShopApp.Domain.Entities.BookCurrentAmount", b =>
                 {
-                    b.HasOne("BookShopApp.Domain.Book", "Book")
+                    b.HasOne("BookShopApp.Domain.Entities.Book", "Book")
                         .WithOne("Amount")
-                        .HasForeignKey("BookShopApp.Domain.BookCurrentAmount", "BookId")
+                        .HasForeignKey("BookShopApp.Domain.Entities.BookCurrentAmount", "BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Book");
                 });
 
-            modelBuilder.Entity("BookShopApp.Domain.BookIncome", b =>
+            modelBuilder.Entity("BookShopApp.Domain.Entities.BookIncome", b =>
                 {
-                    b.HasOne("BookShopApp.Domain.Book", "Book")
+                    b.HasOne("BookShopApp.Domain.Entities.Book", "Book")
                         .WithMany("Income")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -247,9 +239,9 @@ namespace BookShopApp.WebApi.Migrations
                     b.Navigation("Book");
                 });
 
-            modelBuilder.Entity("BookShopApp.Domain.BookPrice", b =>
+            modelBuilder.Entity("BookShopApp.Domain.Entities.BookPrice", b =>
                 {
-                    b.HasOne("BookShopApp.Domain.Book", "Book")
+                    b.HasOne("BookShopApp.Domain.Entities.Book", "Book")
                         .WithMany("Price")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -258,15 +250,14 @@ namespace BookShopApp.WebApi.Migrations
                     b.Navigation("Book");
                 });
 
-            modelBuilder.Entity("BookShopApp.Domain.Author", b =>
+            modelBuilder.Entity("BookShopApp.Domain.Entities.Author", b =>
                 {
                     b.Navigation("BookAuthors");
                 });
 
-            modelBuilder.Entity("BookShopApp.Domain.Book", b =>
+            modelBuilder.Entity("BookShopApp.Domain.Entities.Book", b =>
                 {
-                    b.Navigation("Amount")
-                        .IsRequired();
+                    b.Navigation("Amount");
 
                     b.Navigation("BookAuthors");
 
@@ -275,7 +266,7 @@ namespace BookShopApp.WebApi.Migrations
                     b.Navigation("Price");
                 });
 
-            modelBuilder.Entity("BookShopApp.Domain.Publisher", b =>
+            modelBuilder.Entity("BookShopApp.Domain.Entities.Publisher", b =>
                 {
                     b.Navigation("Books");
                 });
