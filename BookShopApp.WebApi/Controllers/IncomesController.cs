@@ -2,17 +2,20 @@
 using BookShopApp.Application.CQRS.Income.Create;
 using BookShopApp.Application.CQRS.Income.Query;
 using BookShopApp.WebApi.Models;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookShopApp.WebApi.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
     public class IncomesController:BaseController
     {
-        private readonly IMapper _mapper;
-        public IncomesController(IMapper mapper)
+        private readonly IMediator _mediator;
+
+        public IncomesController(IMediator mediator)
         {
-            _mapper = mapper;
+            _mediator = mediator;
         }
 
         [HttpGet("{bookId}")]
@@ -28,10 +31,9 @@ namespace BookShopApp.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> Create([FromBody] CreateIncomeCommand incomeDto)
+        public async Task<ActionResult<int>> Create([FromBody] CreateIncomeCommand incomeCommand)
         {
-            var command = _mapper.Map<CreateIncomeCommand>(incomeDto);
-            var incomeId = await Mediator.Send(command);
+            var incomeId = await Mediator.Send(incomeCommand);
 
             return Ok(incomeId);
         }
