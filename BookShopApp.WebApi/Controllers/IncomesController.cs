@@ -20,13 +20,10 @@ namespace BookShopApp.WebApi.Controllers
         [HttpGet("{bookId}")]
         public async Task<ActionResult<GetIncomesOfBookViewModel>> Get(int bookId)
         {
-            var query = new GetIncomesOfBookQuery
-            {
-                BookId = bookId
-            };
-            var vm = Mediator.Send(query);
+            var query = new GetIncomesOfBookQuery { BookId = bookId };
+            var result = Mediator.Send(query);
 
-            return Ok(vm);
+            return Ok(result);
         }
 
         [HttpPost]

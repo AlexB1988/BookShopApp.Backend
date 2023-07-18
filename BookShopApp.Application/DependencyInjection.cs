@@ -14,7 +14,7 @@ namespace BookShopApp.Application
             services.AddValidatorsFromAssemblies(new[] {Assembly.GetExecutingAssembly()});
             services.AddTransient(typeof(IPipelineBehavior<,>),
                 typeof(ValidationBehavior<,>));
-            services.AddScoped<Seed>();
+            //services.AddScoped<Seed>();
             return services;
         }
     }

@@ -24,9 +24,9 @@ namespace BookShopApp.WebApi.Controllers
         public async Task<IActionResult> GetAll()
         {
             var query=new GetBookListQuery();
-            var vm = await Mediator.Send(query);
+            var result = await Mediator.Send(query);
 
-            return Ok(vm);
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
@@ -34,9 +34,9 @@ namespace BookShopApp.WebApi.Controllers
         {
             var query = new GetBookDetailQuery { Id = id };
 
-            var vm = await Mediator.Send(query);
+            var result = await Mediator.Send(query);
 
-            return Ok(vm);
+            return Ok(result);
         }
 
         [HttpPost]
@@ -58,10 +58,7 @@ namespace BookShopApp.WebApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var command = new DeleteBookCommand
-            {
-                Id = id
-            };
+            var command = new DeleteBookCommand { Id = id };
 
             await Mediator.Send(command);
 

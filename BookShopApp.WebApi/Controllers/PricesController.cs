@@ -23,9 +23,9 @@ namespace BookShopApp.WebApi.Controllers
         public async Task<ActionResult<CurrentPriceListViewModel>> GetAll()
         {
             var query = new GetCurrentPriceListQuery();
-            var vm = await Mediator.Send(query);
+            var result = await Mediator.Send(query);
 
-            return Ok(vm);
+            return Ok(result);
         }
 
         [HttpPost]

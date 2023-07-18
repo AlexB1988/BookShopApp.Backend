@@ -24,9 +24,9 @@ namespace BookShopApp.WebApi.Controllers
         {
             var query = new GetAuthorListQuery();
 
-            var vm = await Mediator.Send(query);
+            var result = await Mediator.Send(query);
 
-            return Ok(vm);
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
@@ -34,9 +34,9 @@ namespace BookShopApp.WebApi.Controllers
         {
             var query = new GetAuthorDetailsQuery { Id = id };
 
-            var vm = await Mediator.Send(query); 
+            var result = await Mediator.Send(query); 
 
-            return Ok(vm);
+            return Ok(result);
         }
 
         [HttpPost]
