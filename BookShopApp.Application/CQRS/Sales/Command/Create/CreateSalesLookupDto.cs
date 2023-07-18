@@ -2,7 +2,7 @@
 using BookShopApp.Application.Common.Mappings;
 using BookShopApp.Domain.Entities;
 
-namespace BookShopApp.Application.CQRS.Sales.Create
+namespace BookShopApp.Application.CQRS.Sales.Command.Create
 {
     public class CreateSaleLookupDto : IMapWith<Sale>
     {

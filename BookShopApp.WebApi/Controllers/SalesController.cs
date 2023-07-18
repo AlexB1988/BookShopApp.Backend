@@ -1,4 +1,4 @@
-﻿using BookShopApp.Application.CQRS.Sales.Create;
+﻿using BookShopApp.Application.CQRS.Sales.Command.Create;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

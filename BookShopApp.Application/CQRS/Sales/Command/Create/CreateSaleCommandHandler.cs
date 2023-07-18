@@ -4,7 +4,7 @@ using BookShopApp.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace BookShopApp.Application.CQRS.Sales.Create
+namespace BookShopApp.Application.CQRS.Sales.Command.Create
 {
     public class CreateSaleCommandHandler : IRequestHandler<CreateSaleCommand, Unit>
     {
@@ -21,10 +21,10 @@ namespace BookShopApp.Application.CQRS.Sales.Create
         {
             var sales = _mapper.Map<List<Sale>>(request.Sales);
 
-            foreach(var sale in sales)
+            foreach (var sale in sales)
             {
                 var currentAmount = await _dataContext.CurrentAmount
-                    .FirstOrDefaultAsync(book => book.BookId==sale.BookId, cancellationToken);
+                    .FirstOrDefaultAsync(book => book.BookId == sale.BookId, cancellationToken);
                 if (sale.Amount > currentAmount.CurrentAmount)
                 {
                     throw new Exception("Такого кол-ва книг нет на складе");

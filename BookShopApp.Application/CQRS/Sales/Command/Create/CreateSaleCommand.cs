@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace BookShopApp.Application.CQRS.Sales.Create
+namespace BookShopApp.Application.CQRS.Sales.Command.Create
 {
     public class CreateSaleCommand : IRequest<Unit>
     {
