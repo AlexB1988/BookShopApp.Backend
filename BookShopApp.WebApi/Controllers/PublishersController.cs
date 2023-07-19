@@ -13,18 +13,18 @@ namespace BookShopApp.WebApi.Controllers
     public class PublishersController : ControllerBase
     {
 
-        private readonly IMediator Mediator;
+        private readonly IMediator _mediator;
 
         public PublishersController(IMediator mediator)
         {
-            Mediator = mediator;
+            _mediator = mediator;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var query = new GetPublisherListQuery();
-            var result = await Mediator.Send(query);
+            var result = await _mediator.Send(query);
 
             return Ok(result);
         }
@@ -33,7 +33,7 @@ namespace BookShopApp.WebApi.Controllers
         public async Task<IActionResult> Get(int id)
         {
             var query = new GetPublisherDetailsQuery { Id = id };
-            var result = await Mediator.Send(query);
+            var result = await _mediator.Send(query);
 
             return Ok(result);
         }
@@ -41,7 +41,7 @@ namespace BookShopApp.WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreatePublisherCommand createPublisher)
         {
-            var publisherId = await Mediator.Send(createPublisher);
+            var publisherId = await _mediator.Send(createPublisher);
 
             return Ok(publisherId);
         }
@@ -50,7 +50,7 @@ namespace BookShopApp.WebApi.Controllers
         public async Task<IActionResult> Update(int id, [FromBody] UpdatePublisherCommand updatePublisher)
         {
             updatePublisher.Id=id;
-            await Mediator.Send(updatePublisher);
+            await _mediator.Send(updatePublisher);
 
             return NoContent();
         }
@@ -59,7 +59,7 @@ namespace BookShopApp.WebApi.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var command = new DeletePublisherCommand { Id = id };
-            await Mediator.Send(command);
+            await _mediator.Send(command);
 
             return NoContent();
         }

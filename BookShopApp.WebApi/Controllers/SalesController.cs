@@ -10,18 +10,18 @@ namespace BookShopApp.WebApi.Controllers
     [Route("api/[controller]")]
     public class SalesController : ControllerBase
     {
-        private readonly IMediator Mediator;
+        private readonly IMediator _mediator;
 
         public SalesController(IMediator mediator)
         {
-            Mediator = mediator;
+            _mediator = mediator;
         }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
             var query = new GetSalesListQuery();
-            var result = Mediator.Send(query);
+            var result = await _mediator.Send(query);
 
             return Ok(result);
         }
@@ -30,7 +30,7 @@ namespace BookShopApp.WebApi.Controllers
         public async Task<IActionResult> GetByDate(DateTime dateBegin, DateTime dateEnd)
         {
             var query = new GetSalesRangeListQuery { DateBegin = dateBegin, DateEnd = dateEnd };
-            var result = await Mediator.Send(query);
+            var result = await _mediator.Send(query);
 
             return Ok(result);
         }
@@ -38,7 +38,7 @@ namespace BookShopApp.WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateSaleCommand createSale)
         {
-            await Mediator.Send(createSale);
+            await _mediator.Send(createSale);
 
             return NoContent();
         }

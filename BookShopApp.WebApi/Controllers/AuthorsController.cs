@@ -12,11 +12,11 @@ namespace BookShopApp.WebApi.Controllers
     [Route("api/[controller]")]
     public class AuthorsController : ControllerBase
     {
-        private readonly IMediator Mediator;
+        private readonly IMediator _mediator;
 
         public AuthorsController(IMediator mediator)
         {
-            Mediator = mediator;
+            _mediator = mediator;
         }
 
         [HttpGet]
@@ -24,7 +24,7 @@ namespace BookShopApp.WebApi.Controllers
         {
             var query = new GetAuthorListQuery();
 
-            var result = await Mediator.Send(query);
+            var result = await _mediator.Send(query);
 
             return Ok(result);
         }
@@ -34,7 +34,7 @@ namespace BookShopApp.WebApi.Controllers
         {
             var query = new GetAuthorDetailsQuery { Id = id };
 
-            var result = await Mediator.Send(query); 
+            var result = await _mediator.Send(query); 
 
             return Ok(result);
         }
@@ -42,7 +42,7 @@ namespace BookShopApp.WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateAuthorCommand createAuthor)
         {
-            var authorId = await Mediator.Send(createAuthor);
+            var authorId = await _mediator.Send(createAuthor);
 
             return Ok(authorId);
         }
@@ -51,7 +51,7 @@ namespace BookShopApp.WebApi.Controllers
         public async Task<IActionResult> Update(int id, [FromBody] UpdateAuthorCommand updateAuthor)
         {
             updateAuthor.Id=id;
-            await Mediator.Send(updateAuthor);
+            await _mediator.Send(updateAuthor);
 
             return NoContent();
         }
@@ -60,7 +60,7 @@ namespace BookShopApp.WebApi.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var command = new DeleteAuthorCommand { Id = id };
-            await Mediator.Send(command);
+            await _mediator.Send(command);
 
             return NoContent();
         }

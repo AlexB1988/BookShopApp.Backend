@@ -13,18 +13,18 @@ namespace BookShopApp.WebApi.Controllers
     public class BooksController : ControllerBase
     {
 
-        private readonly IMediator Mediator;
+        private readonly IMediator _mediator;
 
         public BooksController(IMediator mediator)
         {
-            Mediator = mediator;
+            _mediator = mediator;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var query=new GetBookListQuery();
-            var result = await Mediator.Send(query);
+            var result = await _mediator.Send(query);
 
             return Ok(result);
         }
@@ -34,7 +34,7 @@ namespace BookShopApp.WebApi.Controllers
         {
             var query = new GetBookDetailQuery { Id = id };
 
-            var result = await Mediator.Send(query);
+            var result = await _mediator.Send(query);
 
             return Ok(result);
         }
@@ -42,7 +42,7 @@ namespace BookShopApp.WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateBookCommand createBook)
         {
-            var bookId = await Mediator.Send(createBook);
+            var bookId = await _mediator.Send(createBook);
 
             return Ok(bookId);
         }
@@ -51,7 +51,7 @@ namespace BookShopApp.WebApi.Controllers
         public async Task<IActionResult> Update(int id, [FromBody] UpdateBookCommand updateBook)
         {
             updateBook.Id = id;
-            await Mediator.Send(updateBook);
+            await _mediator.Send(updateBook);
             return NoContent();
         }
 
@@ -60,7 +60,7 @@ namespace BookShopApp.WebApi.Controllers
         {
             var command = new DeleteBookCommand { Id = id };
 
-            await Mediator.Send(command);
+            await _mediator.Send(command);
 
             return NoContent();
         }
