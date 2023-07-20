@@ -27,7 +27,7 @@ namespace BookShopApp.Application.CQRS.Sales.Command.Create
                     .FirstOrDefaultAsync(book => book.BookId == sale.BookId, cancellationToken);
                 if (sale.Amount > currentAmount.CurrentAmount)
                 {
-                    throw new Exception("Такого кол-ва книг нет на складе");
+                    throw new Exception("Такого кол-ва книг нет на складе"); // TODO: Делаешь BadRequestException, который потом обрабатываешь в 400 ошибку. Сейчас у тебя 500 полетит.
                 }
 
                 currentAmount.CurrentAmount -= sale.Amount;

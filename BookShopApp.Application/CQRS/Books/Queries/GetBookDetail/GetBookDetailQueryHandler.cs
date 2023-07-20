@@ -34,6 +34,8 @@ namespace BookShopApp.Application.CQRS.Books.Queries.GetBookDetail
                 .ProjectTo<BookLookupDto>(_mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync(book => book.Id == entity.Id, cancellationToken);
 
+            // TODO: Здесь можно сделать Include, и он подгрузит авторов тоже вместе с книгами. И автомаппер смаппит их тоже, если поставил интерфейс
+
             var authors = await _dataContext.BookAuthors
                 .Where(book => book.BookId == entityBook.Id)
                 .Select(author => author.Author)

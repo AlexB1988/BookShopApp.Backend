@@ -26,7 +26,7 @@ namespace BookShopApp.WebApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{dateBegin}/{dateEnd}")]
+        [HttpGet("{dateBegin}/{dateEnd}")] // TODO: Такое лучше через FromQuery делать.
         public async Task<IActionResult> GetByDate(DateTime dateBegin, DateTime dateEnd)
         {
             var query = new GetSalesRangeListQuery { DateBegin = dateBegin, DateEnd = dateEnd };

@@ -31,6 +31,8 @@ namespace BookShopApp.Application.CQRS.Books.Commands.Delete
             await _dataContext.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;
+
+            // TODO: Прогугли каскадное удаление. Означает, что при удалении сущности, у тебя все связи автоматом удалятся тоже.
         }
     }
 }

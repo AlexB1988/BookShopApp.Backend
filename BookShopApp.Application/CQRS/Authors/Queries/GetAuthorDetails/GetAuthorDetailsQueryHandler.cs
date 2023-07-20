@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookShopApp.Application.CommandsQueries.Authors.Queries.GetAuthorBiography
 {
+    // TODO: Слишком усложненный кейс. Папку называешь "Get", хэндлер и кверя в одном файле, валидатор тебе вообще не нужен здесь. Null никак не придет, а если придет 0, то вот у тебя выскочит ему NotFoundException. И даже если минуса будут, то же самое.
+    // Также слишком сложное название, можно просто GetAuthorQuery
     public class GetAuthorDetailsQueryHandler:IRequestHandler<GetAuthorDetailsQuery,AuthorDetailsViewModel>
     {
         private readonly IDataContext _dataContext;

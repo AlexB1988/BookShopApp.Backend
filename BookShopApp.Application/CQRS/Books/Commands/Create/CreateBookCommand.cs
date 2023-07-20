@@ -10,6 +10,6 @@ namespace BookShopApp.Application.CQRS.Books.Commands.Create
         public int BookIncomeAmount { get; set; }
         public decimal BookIncomePrice { get; set; }
         public decimal CurrentPrice { get; set; }
-        public IList<int> Authors { get; set; }
+        public IList<int> Authors { get; set; } // Почему решил поставить IList? 
     }
 }

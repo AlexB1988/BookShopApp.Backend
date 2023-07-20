@@ -10,6 +10,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookShopApp.Application.CQRS.Books.Queries.GetBooksByAuthor
 {
+    // TODO: Получение книги по разным данным можно поместить в одну кверю, где принимать три nulllable параметра: name, author, publisher.
+    // Дальше эти поля провадилировать хотя бы ifами, и поставить в условия Where. Гораздо меньше кода получилось бы.
     public class GetBooksByAuthorQueryHandler : IRequestHandler<GetBooksByAuthorQuery, BookListViewModel>
     {
         public IDataContext _dataContext;

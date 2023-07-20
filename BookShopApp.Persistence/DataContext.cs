@@ -5,6 +5,9 @@ using System.Reflection;
 
 namespace BookShopApp.Persistence
 {
+    // TODO: Проект должен называться Infrastructure, а уже в нем просто папка Persistence. 
+    // Теоритетически, у тебя тут еще много чего будет помимо бд
+
     public class DataContext : DbContext, IDataContext
     {
         public DbSet<Book> Books { get; set; } 

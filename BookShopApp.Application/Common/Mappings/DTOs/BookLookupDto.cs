@@ -5,6 +5,7 @@ using BookShopApp.Domain.Entities;
 
 namespace BookShopApp.Application.Common.Mappings.DTOs
 {
+    // TODO: Что значит Lookup? Я сначала подумал что тип данных как словарь. Не изваращайся, просто называешь BookViewModel и все
     public class BookLookupDto : IMapWith<Book>
     {
         public int Id { get; set; }

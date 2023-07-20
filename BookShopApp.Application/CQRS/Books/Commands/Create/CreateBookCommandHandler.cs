@@ -22,7 +22,12 @@ namespace BookShopApp.Application.CQRS.Books.Commands.Create
                 throw new NotFoundException(nameof(Publisher), request.PublisherId);
             }
 
+            // TODO: Здесь у тебя происходит два запроса в базу чтобы вытащить публишера.
+            // Сделал один запрос, достал публишера, а потом проверил на нулл и выкинул исключение.
+
             var entityPublisher = await _dataContext.Publishers.FirstOrDefaultAsync(publisher => publisher.Id == request.PublisherId, cancellationToken);
+
+            // TODO: Не надо в названии переменной добавлять entity
             var entityBook = new Book
             {
                 Name = request.Name,
@@ -78,6 +83,9 @@ namespace BookShopApp.Application.CQRS.Books.Commands.Create
             await _dataContext.SaveChangesAsync(cancellationToken);
 
             return entityBook.Id;
+
+            // TODO: В целом рабочий подход, но есть еще другой. Ты создал книгу, и все эти связные сущности также есть в сущности Book в виде ICollection.
+            // Просто пишешь book.Prices.Add(new BookPrice {Price = ..., DateBegin = ...}); Все, энтити сам поймет, что ты хочешь добавить связную сущность к этой книге.
         }
     }
 }

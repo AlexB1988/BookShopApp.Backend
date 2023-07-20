@@ -4,6 +4,7 @@ using BookShopApp.Domain.Entities;
 
 namespace BookShopApp.Application.CommandsQueries.Authors.Queries.GetAuthorBiography
 {
+    // TODO: Можно проще назвать: AuthorViewModel
     public class AuthorDetailsViewModel:IMapWith<Author>
     {
         public int Id { get; set; }
