@@ -12,6 +12,7 @@ namespace BookShopApp.WebApi.Controllers
     [Route("api/[controller]")]
     public class AuthorsController : ControllerBase
     {
+
         private readonly IMediator _mediator;
 
         public AuthorsController(IMediator mediator)
@@ -32,7 +33,7 @@ namespace BookShopApp.WebApi.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var query = new GetAuthorDetailsQuery { Id = id };
+            var query = new GetAuthorQuery { Id = id };
 
             var result = await _mediator.Send(query); 
 

@@ -1,4 +1,4 @@
-﻿using BookShopApp.Application.Common.Exceptions;
+﻿using BookShopApp.Application.Exceptions;
 using FluentValidation;
 using System.Net;
 //Переделать под Newtonsoft
@@ -8,7 +8,9 @@ namespace BookShopApp.WebApi.Middleware
 {
     public class CustomExceptionHandlerMiddleware
     {
+
         private readonly RequestDelegate _next;
+
         public CustomExceptionHandlerMiddleware(RequestDelegate next)
         {
             _next = next;

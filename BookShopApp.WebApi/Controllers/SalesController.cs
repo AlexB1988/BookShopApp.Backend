@@ -1,6 +1,6 @@
 ﻿using BookShopApp.Application.CQRS.Sales.Command.Create;
-using BookShopApp.Application.CQRS.Sales.Command.Queries.GetSalesList;
-using BookShopApp.Application.CQRS.Sales.Command.Queries.GetSalesRangeList;
+using BookShopApp.Application.UseCases.Sales.Queries.GetSalesList;
+using BookShopApp.Application.UseCases.Sales.Queries.GetSalesRangeList;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +10,7 @@ namespace BookShopApp.WebApi.Controllers
     [Route("api/[controller]")]
     public class SalesController : ControllerBase
     {
+
         private readonly IMediator _mediator;
 
         public SalesController(IMediator mediator)
@@ -26,8 +27,8 @@ namespace BookShopApp.WebApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{dateBegin}/{dateEnd}")] // TODO: Такое лучше через FromQuery делать.
-        public async Task<IActionResult> GetByDate(DateTime dateBegin, DateTime dateEnd)
+        [HttpGet("/dateRange")]
+        public async Task<IActionResult> GetByDate([FromQuery] DateTime dateBegin, [FromQuery] DateTime dateEnd)
         {
             var query = new GetSalesRangeListQuery { DateBegin = dateBegin, DateEnd = dateEnd };
             var result = await _mediator.Send(query);

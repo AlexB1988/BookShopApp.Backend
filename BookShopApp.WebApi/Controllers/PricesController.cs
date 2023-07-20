@@ -12,6 +12,7 @@ namespace BookShopApp.WebApi.Controllers
     [Route("api/[controller]")]
     public class PricesController : ControllerBase
     {
+
         private readonly IMediator _mediator;
 
         public PricesController(IMediator mediator)

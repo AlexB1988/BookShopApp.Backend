@@ -1,7 +1,7 @@
 using BookShopApp.Application;
-using BookShopApp.Application.Common.Mappings;
+using BookShopApp.Application.Mappings;
 using BookShopApp.Application.Interfaces;
-using BookShopApp.Persistence;
+using BookShopApp.Infrastructure.Persistence;
 using BookShopApp.WebApi.Middleware;
 using Serilog;
 using Serilog.Events;
@@ -58,12 +58,15 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseSwagger();
+
 app.UseSwaggerUI(config =>
 {
     config.RoutePrefix = string.Empty;
     config.SwaggerEndpoint("swagger/v1/swagger.json", "BookShopApp API");
 });
+
 app.UseCustomExceptionHandler();
+
 app.UseRouting();
 
 app.UseHttpsRedirection();

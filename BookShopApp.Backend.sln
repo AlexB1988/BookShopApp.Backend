@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookShopApp.Domain", "BookS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookShopApp.Application", "BookShopApp.Application\BookShopApp.Application.csproj", "{A0AA778F-FBDC-4349-81B0-03C0C7EC5FDB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookShopApp.Persistence", "BookShopApp.Persistence\BookShopApp.Persistence.csproj", "{868DD0A6-FDD9-4539-9825-64C296A8E121}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookShopApp.Infrastructure", "BookShopApp.Persistence\BookShopApp.Infrastructure.csproj", "{868DD0A6-FDD9-4539-9825-64C296A8E121}"
 	ProjectSection(ProjectDependencies) = postProject
 		{A0AA778F-FBDC-4349-81B0-03C0C7EC5FDB} = {A0AA778F-FBDC-4349-81B0-03C0C7EC5FDB}
 	EndProjectSection
