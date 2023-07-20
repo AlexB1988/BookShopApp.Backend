@@ -3,9 +3,18 @@ using BookShopApp.Application.Common.Mappings;
 using BookShopApp.Application.Interfaces;
 using BookShopApp.Persistence;
 using BookShopApp.WebApi.Middleware;
+using Serilog;
+using Serilog.Events;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+    .WriteTo.File("BookShopAppLog-.txt", rollingInterval:
+        RollingInterval.Day)
+    .CreateLogger();
+
 
 builder.Services.AddAutoMapper(config =>
 {
@@ -41,8 +50,6 @@ void SeedData(IHost app)
         service.SeedDataContext();
     }
 }
-
-
 
 if (app.Environment.IsDevelopment())
 {
