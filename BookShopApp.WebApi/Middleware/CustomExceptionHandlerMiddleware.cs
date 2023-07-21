@@ -49,7 +49,7 @@ namespace BookShopApp.WebApi.Middleware
 
             if (result == string.Empty)
             {
-                result = JsonSerializer.Serialize(new {error=ex.Message});
+                result = JsonConvert.SerializeObject(new {error=ex.Message});
             }
 
             return context.Response.WriteAsync(result);
