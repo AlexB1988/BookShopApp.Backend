@@ -41,7 +41,6 @@ namespace BookShopApp.Application.CQRS.Publishers.Commands.Update
                 publisher.City = request.City;
 
                 await _dataContext.SaveChangesAsync(cancellationToken);
-
             }
         }
     }

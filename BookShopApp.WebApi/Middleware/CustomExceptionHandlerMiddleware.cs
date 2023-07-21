@@ -1,8 +1,7 @@
 ﻿using BookShopApp.Application.Exceptions;
 using FluentValidation;
 using System.Net;
-//Переделать под Newtonsoft
-using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace BookShopApp.WebApi.Middleware
 {
@@ -36,7 +35,7 @@ namespace BookShopApp.WebApi.Middleware
             {
                 case ValidationException validationException:
                     code= HttpStatusCode.BadRequest;
-                    result=JsonSerializer.Serialize(validationException.Errors);
+                    result=JsonConvert.SerializeObject(validationException.Errors);
                     break;
                 case NotFoundException:
                     code=HttpStatusCode.NotFound;
