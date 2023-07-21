@@ -7,11 +7,17 @@ namespace BookShopApp.Application.Mappings.DTOs
     public class BookViewModel: IMapWith<Book>
     {
         public int Id { get; set; }
+        
         public string Name { get; set; }
+        
         public int Year { get; set; }
+        
         public int Amount { get; set; }
+        
         public string Publisher { get; set; }
+        
         public decimal Price { get; set; }
+        
         public IList<AuthorViewModel> Authors { get; set; }
 
         public void Mapping(Profile profile)

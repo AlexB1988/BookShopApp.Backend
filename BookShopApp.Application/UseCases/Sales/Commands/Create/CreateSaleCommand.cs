@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BookShopApp.Application.Exceptions;
 using BookShopApp.Application.Interfaces;
 using BookShopApp.Domain.Entities;
 using MediatR;
@@ -6,13 +7,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookShopApp.Application.CQRS.Sales.Command.Create
 {
-    public class CreateSaleCommand : IRequest<Unit>
+    public class CreateSaleCommand : IRequest
     {
         public ICollection<CreateSaleViewModel> Sales { get; set; }
 
-        private class Handler : IRequestHandler<CreateSaleCommand, Unit>
+        private class Handler : IRequestHandler<CreateSaleCommand>
         {
+
             private readonly IDataContext _dataContext;
+
             private readonly IMapper _mapper;
 
             public Handler(IDataContext dataContext, IMapper mapper)
@@ -21,7 +24,7 @@ namespace BookShopApp.Application.CQRS.Sales.Command.Create
                 _mapper = mapper;
             }
 
-            public async Task<Unit> Handle(CreateSaleCommand request, CancellationToken cancellationToken)
+            public async Task Handle(CreateSaleCommand request, CancellationToken cancellationToken)
             {
                 var sales = _mapper.Map<List<Sale>>(request.Sales);
 
@@ -29,9 +32,10 @@ namespace BookShopApp.Application.CQRS.Sales.Command.Create
                 {
                     var currentAmount = await _dataContext.CurrentAmount
                         .FirstOrDefaultAsync(book => book.BookId == sale.BookId, cancellationToken);
-                    if (sale.Amount > currentAmount.CurrentAmount)
+
+                    if (currentAmount.CurrentAmount < sale.Amount)
                     {
-                        throw new Exception("Такого кол-ва книг нет на складе"); // TODO: Делаешь BadRequestException, который потом обрабатываешь в 400 ошибку. Сейчас у тебя 500 полетит.
+                        throw new BadRequestException("такого кол-ва книг нет на складе");
                     }
 
                     currentAmount.CurrentAmount -= sale.Amount;
@@ -41,7 +45,6 @@ namespace BookShopApp.Application.CQRS.Sales.Command.Create
 
                 await _dataContext.SaveChangesAsync(cancellationToken);
 
-                return Unit.Value;
             }
         }
     }

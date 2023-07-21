@@ -7,6 +7,7 @@ namespace BookShopApp.Application.CQRS.Publishers.Queries.GetPublisherList
     public class PublisherViewModel : IMapWith<Publisher>
     {
         public int Id { get; set; }
+
         public string Name { get; set; }
 
         public void Mapping(Profile profile)

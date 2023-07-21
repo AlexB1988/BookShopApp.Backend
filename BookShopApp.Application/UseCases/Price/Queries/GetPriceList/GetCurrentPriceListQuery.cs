@@ -11,6 +11,7 @@ namespace BookShopApp.Application.CQRS.Price.Queries.GetBookPriceList
 
         private class Handler : IRequestHandler<GetCurrentPriceListQuery, ICollection<PriceViewModel>>
         {
+
             private readonly IDataContext _dataContext;
 
             private readonly IMapper _mapper;

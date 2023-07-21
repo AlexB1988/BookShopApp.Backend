@@ -11,6 +11,7 @@ namespace BookShopApp.Application.CommandsQueries.Authors.Queries.GetAuthorList
 
         public class GetAuthorListQueryHandler : IRequestHandler<GetAuthorListQuery, ICollection<AuthorViewModel>>
         {
+
             private readonly IDataContext _dataContext;
 
             private readonly IMapper _mapper;

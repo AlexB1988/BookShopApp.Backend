@@ -13,6 +13,7 @@ namespace BookShopApp.Application.CQRS.Books.Queries.GetBookList
 
         private class Handler : IRequestHandler<GetBookListQuery, ICollection<BookViewModel>>
         {
+
             public IDataContext _dataContext;
 
             public IMapper _mapper;
@@ -35,7 +36,7 @@ namespace BookShopApp.Application.CQRS.Books.Queries.GetBookList
                         .Where(book => book.BookId == entityBook.Id)
                         .Select(author => author.Author)
                         .ToListAsync(cancellationToken);
-                    entityBook.Authors = _mapper.Map<List<AuthorViewModel>>(authors);
+                    //entityBook.Authors = _mapper.Map<List<AuthorViewModel>>(authors);
                 }
 
                 return book;

@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace BookShopApp.Application.CQRS.Books.Commands.Update
 {
-    public class UpdateBookCommand : IRequest<Unit>
+    public class UpdateBookCommand : IRequest
     {
         [JsonIgnore]
         public int Id { get; set; }
@@ -21,7 +21,7 @@ namespace BookShopApp.Application.CQRS.Books.Commands.Update
 
         public IList<int> Authors { get; set; }
 
-        private class Handler : IRequestHandler<UpdateBookCommand, Unit>
+        private class Handler : IRequestHandler<UpdateBookCommand>
         {
 
             private readonly IDataContext _dataContext;
@@ -31,14 +31,11 @@ namespace BookShopApp.Application.CQRS.Books.Commands.Update
                 _dataContext = dataContext;
             }
 
-            public async Task<Unit> Handle(UpdateBookCommand request, CancellationToken cancellationToken)
+            public async Task Handle(UpdateBookCommand request, CancellationToken cancellationToken)
             {
-                var book = await _dataContext.Books.FirstOrDefaultAsync(book => book.Id == request.Id, cancellationToken);
-
-                if (book == null)
-                {
-                    throw new NotFoundException(nameof(Book), request.Id);
-                }
+                var book = await _dataContext.Books
+                    .FirstOrDefaultAsync(book => book.Id == request.Id, cancellationToken)
+                    ?? throw new NotFoundException(nameof(Book), request.Id);
 
                 book.Name = request.Name;
                 book.Year = request.Year;
@@ -61,7 +58,6 @@ namespace BookShopApp.Application.CQRS.Books.Commands.Update
                 await _dataContext.BookAuthors.AddRangeAsync(entityBookAuthors, cancellationToken);
                 await _dataContext.SaveChangesAsync(cancellationToken);
 
-                return Unit.Value;
             }
         }
     }

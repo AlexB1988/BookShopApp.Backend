@@ -12,6 +12,7 @@ namespace BookShopApp.Application.CQRS.Income.Query
 
         private class Handler : IRequestHandler<GetIncomesOfBookQuery, ICollection<GetIncomeViewModel>>
         {
+
             private IDataContext _dataContext;
 
             private IMapper _mapper;

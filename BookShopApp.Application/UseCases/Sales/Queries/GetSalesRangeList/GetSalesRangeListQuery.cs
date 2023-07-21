@@ -14,6 +14,7 @@ namespace BookShopApp.Application.UseCases.Sales.Queries.GetSalesRangeList
 
         private class Handler : IRequestHandler<GetSalesRangeListQuery, ICollection<GetSaleViewModel>>
         {
+
             private readonly IDataContext _dataContext;
 
             private readonly IMapper _mapper;

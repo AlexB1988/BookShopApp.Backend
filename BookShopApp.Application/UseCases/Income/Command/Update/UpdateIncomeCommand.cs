@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace BookShopApp.Application.CQRS.Income.Command.Update
 {
-    public class UpdateIncomeCommand : IRequest<Unit>, IMapWith<BookIncome>
+    public class UpdateIncomeCommand : IRequest, IMapWith<BookIncome>
     {
         [JsonIgnore]
         public int Id { get; set; }
@@ -20,28 +20,25 @@ namespace BookShopApp.Application.CQRS.Income.Command.Update
 
         public decimal IncomePrice { get; set; }
 
-        private class Handler : IRequestHandler<UpdateIncomeCommand, Unit>
+        private class Handler : IRequestHandler<UpdateIncomeCommand>
         {
 
             private readonly IDataContext _dataContext;
 
             private readonly IMapper _mapper;
+
             public Handler(IDataContext dataContext, IMapper mapper)
             {
                 _dataContext = dataContext;
                 _mapper = mapper;
             }
 
-            public async Task<Unit> Handle(UpdateIncomeCommand request, CancellationToken cancellationToken)
+            public async Task Handle(UpdateIncomeCommand request, CancellationToken cancellationToken)
             {
-                var income = await _dataContext.Income.FirstOrDefaultAsync(income => income.Id == request.Id, cancellationToken);
+                var income = await _dataContext.Income
+                    .FirstOrDefaultAsync(income => income.Id == request.Id, cancellationToken)
+                    ?? throw new NotFoundException(nameof(BookIncome), request.Id);
 
-                if (income == null)
-                {
-                    throw new NotFoundException(nameof(BookIncome), request.Id);
-                }
-
-                return Unit.Value;
             }
         }
     }

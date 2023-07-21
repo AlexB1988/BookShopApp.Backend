@@ -7,14 +7,14 @@ using Newtonsoft.Json;
 
 namespace BookShopApp.Application.CQRS.Price.Commands.Update
 {
-    public class UpdatePriceCommand : IRequest<Unit>
+    public class UpdatePriceCommand : IRequest
     {
         [JsonIgnore]
         public int Id { get; set; }
 
         public decimal Price { get; set; }
 
-        private class Handler : IRequestHandler<UpdatePriceCommand, Unit>
+        private class Handler : IRequestHandler<UpdatePriceCommand>
         {
 
             private readonly IDataContext _dataContext;
@@ -24,19 +24,16 @@ namespace BookShopApp.Application.CQRS.Price.Commands.Update
                 _dataContext = dataContext;
             }
 
-            public async Task<Unit> Handle(UpdatePriceCommand request, CancellationToken cancellationToken)
+            public async Task Handle(UpdatePriceCommand request, CancellationToken cancellationToken)
             {
-                var price = await _dataContext.Prices.FirstOrDefaultAsync(price => price.Id == request.Id, cancellationToken);
+                var price = await _dataContext.Prices
+                    .FirstOrDefaultAsync(price => price.Id == request.Id, cancellationToken)
+                    ?? throw new NotFoundException(nameof(BookPrice), request.Id);
 
-                if (price == null)
-                {
-                    throw new NotFoundException(nameof(BookPrice), request.Id);
-                }
                 price.Price = request.Price;
 
                 await _dataContext.SaveChangesAsync(cancellationToken);
 
-                return Unit.Value;
             }
         }
     }

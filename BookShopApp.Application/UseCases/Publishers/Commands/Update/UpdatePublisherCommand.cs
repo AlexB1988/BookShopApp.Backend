@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookShopApp.Application.CQRS.Publishers.Commands.Update
 {
-    public class UpdatePublisherCommand : IRequest<Unit>
+    public class UpdatePublisherCommand : IRequest
     {
         [JsonIgnore]
         public int Id { get; set; }
@@ -20,7 +20,7 @@ namespace BookShopApp.Application.CQRS.Publishers.Commands.Update
 
         public int YearBegin { get; set; }
 
-        private class Handler : IRequestHandler<UpdatePublisherCommand, Unit>
+        private class Handler : IRequestHandler<UpdatePublisherCommand>
         {
 
             private readonly IDataContext _dataContext;
@@ -30,13 +30,11 @@ namespace BookShopApp.Application.CQRS.Publishers.Commands.Update
                 _dataContext = dataContext;
             }
 
-            public async Task<Unit> Handle(UpdatePublisherCommand request, CancellationToken cancellationToken)
+            public async Task Handle(UpdatePublisherCommand request, CancellationToken cancellationToken)
             {
-                var publisher = await _dataContext.Publishers.FirstOrDefaultAsync(publisher => publisher.Id == request.Id, cancellationToken);
-                if (publisher == null)
-                {
-                    throw new NotFoundException(nameof(Publisher), request.Id);
-                }
+                var publisher = await _dataContext.Publishers
+                    .FirstOrDefaultAsync(publisher => publisher.Id == request.Id, cancellationToken)
+                    ?? throw new NotFoundException(nameof(Publisher), request.Id);
 
                 publisher.Name = request.Name;
                 publisher.YearBegin = request.YearBegin;
@@ -44,7 +42,6 @@ namespace BookShopApp.Application.CQRS.Publishers.Commands.Update
 
                 await _dataContext.SaveChangesAsync(cancellationToken);
 
-                return Unit.Value;
             }
         }
     }

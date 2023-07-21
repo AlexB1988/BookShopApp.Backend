@@ -19,6 +19,7 @@ namespace BookShopApp.Application.CQRS.Books.Queries.GetBooksByAuthor
 
         private class Handler : IRequestHandler<GetBooksByAuthorQuery, ICollection<BookViewModel>>
         {
+
             public IDataContext _dataContext;
 
             public IMapper _mapper;
@@ -37,12 +38,8 @@ namespace BookShopApp.Application.CQRS.Books.Queries.GetBooksByAuthor
                             || book.Name.Contains(request.Name)
                             || book.BookAuthors.Any(author => author.AuthorId == request.AuthorId))
                         .ProjectTo<BookViewModel>(_mapper.ConfigurationProvider)
-                        .ToListAsync(cancellationToken);
-
-                if (books == null)
-                {
-                    throw new NotFoundException(nameof(Book), "Книг не найдено");
-                }
+                        .ToListAsync(cancellationToken)
+                        ?? throw new NotFoundException(nameof(Book), "Книг не найдено");
 
                 return books;
             }

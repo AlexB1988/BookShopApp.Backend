@@ -13,7 +13,9 @@ namespace BookShopApp.Application.CommandsQueries.Authors.Queries.GetAuthorBiogr
 
         private class Handler : IRequestHandler<GetAuthorQuery, AuthorViewModel>
         {
+           
             private readonly IDataContext _dataContext;
+           
             private readonly IMapper _mapper;
 
             public Handler(IDataContext dataContext, IMapper mapper)
@@ -24,12 +26,9 @@ namespace BookShopApp.Application.CommandsQueries.Authors.Queries.GetAuthorBiogr
 
             public async Task<AuthorViewModel> Handle(GetAuthorQuery request, CancellationToken cancellationToken)
             {
-                var author = await _dataContext.Authors.FirstOrDefaultAsync(author => author.Id == request.Id);
-
-                if (author == null)
-                {
-                    throw new NotFoundException(nameof(Author), request.Id);
-                }
+                var author = await _dataContext.Authors
+                    .FirstOrDefaultAsync(author => author.Id == request.Id)
+                    ?? throw new NotFoundException(nameof(Author), request.Id);
 
                 return _mapper.Map<AuthorViewModel>(author);
             }

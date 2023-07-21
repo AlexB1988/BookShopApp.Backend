@@ -1,0 +1,12 @@
+2023-07-21 11:20:22.721 +03:00 [INF] BookShopApp Request: GetBookListQuery {"$type":"GetBookListQuery"}
+2023-07-21 11:21:07.911 +03:00 [INF] BookShopApp Request: CreateBookCommand {"Name":"string","Year":2020,"PublisherId":1,"BookIncomeAmount":10,"BookIncomePrice":900,"CurrentPrice":1500,"Authors":[2,4],"$type":"CreateBookCommand"}
+2023-07-21 11:21:12.540 +03:00 [INF] BookShopApp Request: GetBookListQuery {"$type":"GetBookListQuery"}
+2023-07-21 12:13:22.996 +03:00 [INF] BookShopApp Request: GetBookDetailQuery {"Id":2,"$type":"GetBookDetailQuery"}
+2023-07-21 12:20:29.156 +03:00 [INF] BookShopApp Request: GetBookDetailQuery {"Id":2,"$type":"GetBookDetailQuery"}
+2023-07-21 12:24:51.176 +03:00 [INF] BookShopApp Request: GetBookDetailQuery {"Id":2,"$type":"GetBookDetailQuery"}
+2023-07-21 12:26:10.389 +03:00 [INF] BookShopApp Request: GetBookDetailQuery {"Id":2,"$type":"GetBookDetailQuery"}
+2023-07-21 12:27:34.269 +03:00 [INF] BookShopApp Request: GetBookDetailQuery {"Id":2,"$type":"GetBookDetailQuery"}
+2023-07-21 12:34:28.269 +03:00 [INF] BookShopApp Request: GetBookDetailQuery {"Id":2,"$type":"GetBookDetailQuery"}
+2023-07-21 13:11:00.834 +03:00 [INF] BookShopApp Request: CreateSaleCommand {"Sales":[{"BookId":2,"Amount":10,"$type":"CreateSaleViewModel"}],"$type":"CreateSaleCommand"}
+2023-07-21 13:11:11.613 +03:00 [INF] BookShopApp Request: DeleteBookCommand {"Id":2,"$type":"DeleteBookCommand"}
+2023-07-21 13:12:06.831 +03:00 [INF] BookShopApp Request: DeleteBookCommand {"Id":2,"$type":"DeleteBookCommand"}

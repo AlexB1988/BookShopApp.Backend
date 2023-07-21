@@ -23,6 +23,7 @@ namespace BookShopApp.Application.Authors.Commands.Create
 
         private class Handler : IRequestHandler<CreateAuthorCommand, int>
         {
+
             private readonly IDataContext _dataContext;
 
             private readonly IMapper _mapper;

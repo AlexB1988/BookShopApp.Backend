@@ -11,7 +11,9 @@ namespace BookShopApp.Application.CQRS.Publishers.Queries.GetPublisherList
 
         private class Handler : IRequestHandler<GetPublisherListQuery, ICollection<PublisherViewModel>>
         {
+
             private readonly IDataContext _dataContext;
+
             private readonly IMapper _mapper;
 
             public Handler(IDataContext dataContext, IMapper mapper)

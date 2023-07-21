@@ -13,7 +13,9 @@ namespace BookShopApp.Application.CQRS.Publishers.Queries.GetPublisherDetails
 
         private class Handler : IRequestHandler<GetPublisherDetailsQuery, PublisherDetailsViewModel>
         {
+
             private readonly IDataContext _dataContext;
+
             private readonly IMapper _mapper;
 
             public Handler(IDataContext dataContext, IMapper mapper)
@@ -23,12 +25,9 @@ namespace BookShopApp.Application.CQRS.Publishers.Queries.GetPublisherDetails
             }
             public async Task<PublisherDetailsViewModel> Handle(GetPublisherDetailsQuery request, CancellationToken cancellationToken)
             {
-                var publisher = await _dataContext.Publishers.FirstOrDefaultAsync(publisher => publisher.Id == request.Id);
-
-                if (publisher == null)
-                {
-                    throw new NotFoundException(nameof(Publisher), request.Id);
-                }
+                var publisher = await _dataContext.Publishers
+                    .FirstOrDefaultAsync(publisher => publisher.Id == request.Id)
+                    ?? throw new NotFoundException(nameof(Publisher), request.Id);
 
                 return _mapper.Map<PublisherDetailsViewModel>(publisher);
             }

@@ -29,6 +29,7 @@ namespace BookShopApp.Application.CQRS.Income.Create
 
         private class Handler : IRequestHandler<CreateIncomeCommand, int>
         {
+
             private readonly IDataContext _dataContext;
 
             private readonly IMapper _mapper;

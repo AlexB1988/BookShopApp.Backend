@@ -16,6 +16,7 @@ namespace BookShopApp.Application.CQRS.Books.Queries.GetBookDetail
 
         private class Handler : IRequestHandler<GetBookDetailQuery, BookViewModel>
         {
+
             public IDataContext _dataContext;
 
             public IMapper _mapper;
@@ -33,8 +34,6 @@ namespace BookShopApp.Application.CQRS.Books.Queries.GetBookDetail
                     .ProjectTo<BookViewModel>(_mapper.ConfigurationProvider)
                     .FirstOrDefaultAsync(book => book.Id == request.Id, cancellationToken)
                     ?? throw new NotFoundException(nameof(Book), request.Id);
-
-                // TODO: Здесь можно сделать Include, и он подгрузит авторов тоже вместе с книгами. И автомаппер смаппит их тоже, если поставил интерфейс
 
                 var authors = await _dataContext.BookAuthors
                     .Where(bk => bk.BookId == book.Id)

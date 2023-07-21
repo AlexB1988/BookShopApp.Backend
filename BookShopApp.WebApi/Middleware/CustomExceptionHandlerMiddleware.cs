@@ -41,6 +41,9 @@ namespace BookShopApp.WebApi.Middleware
                 case NotFoundException:
                     code=HttpStatusCode.NotFound;
                     break;
+                case BadRequestException:
+                    code=HttpStatusCode.BadRequest;
+                    break;
             }
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)code;

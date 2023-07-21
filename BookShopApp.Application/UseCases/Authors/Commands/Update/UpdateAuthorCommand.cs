@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace BookShopApp.Application.CQRS.Authors.Commands.Update
 {
-    public class UpdateAuthorCommand : IRequest<Unit>
+    public class UpdateAuthorCommand : IRequest
     {
         [JsonIgnore]
         public int Id { get; set; }
@@ -17,7 +17,7 @@ namespace BookShopApp.Application.CQRS.Authors.Commands.Update
 
         public string Biography { get; set; }
 
-        private class Handler : IRequestHandler<UpdateAuthorCommand, Unit>
+        private class Handler : IRequestHandler<UpdateAuthorCommand>
         {
 
             private readonly IDataContext _dataContext;
@@ -30,21 +30,17 @@ namespace BookShopApp.Application.CQRS.Authors.Commands.Update
                 _mapper = mapper;
             }
 
-            public async Task<Unit> Handle(UpdateAuthorCommand request, CancellationToken cancellationToken)
+            public async Task Handle(UpdateAuthorCommand request, CancellationToken cancellationToken)
             {
-                var author = await _dataContext.Authors.FirstOrDefaultAsync(author => author.Id == request.Id, cancellationToken);
-
-                if (author == null)
-                {
-                    throw new NotFoundException(nameof(Author), request.Id);
-                }
+                var author = await _dataContext.Authors
+                    .FirstOrDefaultAsync(author => author.Id == request.Id, cancellationToken)
+                    ?? throw new NotFoundException(nameof(Author), request.Id);
 
                 author.Name = request.Name;
                 author.Biography = request.Biography;
 
                 await _dataContext.SaveChangesAsync(cancellationToken);
 
-                return Unit.Value;
             }
         }
     }
